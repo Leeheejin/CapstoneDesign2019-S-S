@@ -72,4 +72,11 @@ public class LoginController {
         ModelAndView mv = new ModelAndView("login/loginSuccess");
         return mv;
     }
+
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpSession session) {
+        session.invalidate();
+        ModelAndView mv = new ModelAndView("redirect:/");
+        return mv;
+    }
 }
