@@ -6,6 +6,8 @@ Todo list
 - [X] Env Settings
 - [X] basic UI design
 - [X] Archtecturing Server logics
+- [X] Backend Basic function impl
+- [X] Postman testing for Backend
 - [] making Arduino prototype hardware
 - [] Android frontend app impl
 
