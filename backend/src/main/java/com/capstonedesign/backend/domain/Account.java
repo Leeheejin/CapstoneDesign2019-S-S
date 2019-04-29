@@ -38,4 +38,10 @@ public class Account {
     private Long registerDate;
 
     private List<Cup> cupList;
+
+    //Check Password
+    //TODO : NOT Encrypted!!!!
+    public boolean matchPassword(String password) {
+        return this.password.equals(password);
+    }
 }
