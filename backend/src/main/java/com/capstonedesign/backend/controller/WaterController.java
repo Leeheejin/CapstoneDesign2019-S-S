@@ -24,13 +24,13 @@ public class WaterController {
     }
 
     @PostMapping(path = "/drink")
-    public void drink(@RequestBody Water water) {
+    public void userDrinkPerOneTime(@RequestBody Water water) {
 
         waterService.saveDrinkLog(water);
     }
 
-    @GetMapping(path ="/getonedrink")
-    public Integer getOneDrink(@RequestBody Water water) {
+    @GetMapping(path ="/getdrinkinfo")
+    public Integer getDrinkInfoPerOneTime(@RequestBody Water water) {
 
         return userService.getOneDrink(water.getCid());
     }

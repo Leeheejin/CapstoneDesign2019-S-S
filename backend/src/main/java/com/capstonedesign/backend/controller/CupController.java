@@ -24,8 +24,8 @@ public class CupController {
         this.userService = userService;
     }
 
-    @PostMapping(path = "/savecup")
-    public void saveCup(@RequestBody Cup cup) {
+    @PostMapping(path = "/savecupinfo")
+    public void saveCupInfo(@RequestBody Cup cup) {
 
         cupService.saveCupInfo(cup);
     }
