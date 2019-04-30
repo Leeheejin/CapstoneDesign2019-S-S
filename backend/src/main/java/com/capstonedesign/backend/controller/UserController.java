@@ -20,23 +20,20 @@ public class UserController {
     @PostMapping(path = "/register")
     public void register(@RequestBody Account account) {
 
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if(!userService.isAlreadyExistUserId(account)) {
 
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
-        account.setRegisterDate(System.currentTimeMillis());
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        userService.createNewAccount(account);
+            account.setPassword(passwordEncoder.encode(account.getPassword()));
+            account.setRegisterDate(System.currentTimeMillis());
+
+            userService.createNewAccount(account);
+        }
     }
 
     @GetMapping(path = "/userinfo")
     public Account userInfo(@RequestBody Account account) {
         return userService.getUserInfo(account.getId());
-    }
-
-    @PostMapping(path = "/idvalidcheck")
-    public boolean idValidCheck(@RequestBody Account account) {
-
-        return userService.isAlreadyExistUserId(account);
     }
 
     @PostMapping(path = "/changecup")
@@ -46,13 +43,13 @@ public class UserController {
     }
 
     @PostMapping(path = "/onedrink")
-    public void oneDrink(@RequestBody Account account) {
+    public void userDrinkInfo(@RequestBody Account account) {
 
         userService.saveOneDrink(account);
     }
 
-    @PostMapping(path = "/changecurrentproduct")
-    public void saveCurrentCup(@RequestBody Account account) {
+    @PostMapping(path = "/updateusercupinfo")
+    public void updateUserCupInfo(@RequestBody Account account) {
 
         userService.changeCurrentProduct(account);
     }
