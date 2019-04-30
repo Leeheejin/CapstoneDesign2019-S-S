@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_change_info"
+            android:title="정보 변경" />
+        <item
+            android:id="@+id/nav_change_cup"
+            android:title="컵 바꾸기" />
+        <item
+            android:id="@+id/nav_set_push"
+            android:title="푸쉬 설정" />
+        <item
+            android:id="@+id/nav_set_allo"
+            android:title="권장량 설정" />
+        <item
+            android:id="@+id/nav_history"
+            android:title="히스토리" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/menu_share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/menu_send" />
+        </menu>
+    </item>
+
+</menu>
