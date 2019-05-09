@@ -23,8 +23,6 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,39 +52,48 @@ public class MainActivity extends AppCompatActivity
         TextView date = (TextView)findViewById(R.id.txt_date);
         date.setText(strDate);
 
-        int remaintogoal = 700;
+        float user_weight = 70; // 유저 몸무게
+        float dailyGoal = 0; // 일일 권장량
+
+        dailyGoal = user_weight * 30;
+
+        int dailySum = 700;  // 일일 누적 음수량
+
+        int dailyPercent =  (int)((dailySum/dailyGoal) *100); // 일일 누적 달성량
+        int remaintogoal = (int)dailyGoal - dailySum; // 목표달성까지 남은 음수량
+
+
 
         TextView remainToGoal = (TextView)findViewById(R.id.txt_remaintToGoal);
         remainToGoal.setText("목표 달성까지 " + remaintogoal + "mL"  );
 
-        int allo = 30;
 
         TextView daily_allo = (TextView)findViewById(R.id.txt_allo);
-        daily_allo.setText(allo+"%");
+        daily_allo.setText(dailyPercent+"%");
 
         ImageView waterdrop = (ImageView)findViewById(R.id.img_waterdrop);
 
-        if(allo>=30) {
+        if(dailyPercent == 0) {
+            waterdrop.setImageResource(R.drawable.waterdrop);
+        } else if(0<dailyPercent && dailyPercent <= 10){
             waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(0<allo && allo <= 10){
+        } else if(10<dailyPercent && dailyPercent <= 20){
             waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(10<allo && allo <= 20){
+        } else if(20<dailyPercent && dailyPercent <= 30){
             waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(20<allo && allo <= 30){
+        } else if(30<dailyPercent && dailyPercent <= 40){
             waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(30<allo && allo <= 40){
+        } else if(40<dailyPercent && dailyPercent <= 50){
             waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(40<allo && allo <= 50){
+        } else if(50<dailyPercent && dailyPercent <= 60){
             waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(50<allo && allo <= 60){
+        } else if(60<dailyPercent && dailyPercent <= 70){
             waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(60<allo && allo <= 70){
+        } else if(70<dailyPercent && dailyPercent <= 80){
             waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(70<allo && allo <= 80){
+        } else if(80<dailyPercent && dailyPercent <= 90){
             waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(80<allo && allo <= 90){
-            waterdrop.setImageResource(R.drawable.waterdrop30);
-        }  else if(90 <= allo){
+        }  else if(90 <= dailyPercent){
             waterdrop.setImageResource(R.drawable.waterdrop30);
         }
 

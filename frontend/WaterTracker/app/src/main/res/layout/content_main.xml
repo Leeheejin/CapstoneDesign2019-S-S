@@ -45,14 +45,14 @@
 
     <ImageView
         android:id="@+id/img_waterdrop"
-        android:layout_width="151dp"
-        android:layout_height="213dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_width="186dp"
+        android:layout_height="239dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.474"
+        app:layout_constraintVertical_bias="0.454"
         app:srcCompat="@drawable/waterdrop" />
 
     <Switch
