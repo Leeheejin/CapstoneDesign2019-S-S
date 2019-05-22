@@ -15,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -76,13 +75,8 @@ public class MainActivity extends AppCompatActivity
         TextView daily_allo = (TextView)findViewById(R.id.txt_allo);
         daily_allo.setText(dailyPercent+"%");
 
-        //ImageView waterdrop = (ImageView)findViewById(R.id.img_waterdrop);
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.water_prog);
-        progressBar.setMax(100);
-        progressBar.setProgress(30);
-        progressBar.setSecondaryProgress(100);
+        ImageView waterdrop = (ImageView)findViewById(R.id.img_waterdrop);
 
-/*
         if(dailyPercent == 0) {
             waterdrop.setImageResource(R.drawable.waterdrop);
         } else if(0<dailyPercent && dailyPercent <= 10){
@@ -106,7 +100,7 @@ public class MainActivity extends AppCompatActivity
         }  else if(90 <= dailyPercent){
             waterdrop.setImageResource(R.drawable.waterdrop30);
         }
-*/
+
 
 
 
