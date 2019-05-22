@@ -1,24 +1,18 @@
 package com.capstonedesign.backend.domain;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
+@Data
 public class Account {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-
-    @Column(nullable = false, unique = true)
-    private Long pid;
 
     @Column(nullable = false, unique = true)
     private String userMid;
@@ -30,9 +24,13 @@ public class Account {
 
     private Integer oneDrink;
 
+    @OneToOne(targetEntity = Cup.class, fetch = FetchType.LAZY)
     private Cup currentCup;
 
-    private Long registerDate;
+    @OneToMany(targetEntity=Cup.class, fetch=FetchType.LAZY)
+    private List<Cup> cupList = new ArrayList<>();
 
-    private List<Cup> cupList;
+    public void addCupInList(Cup cup) {
+        this.cupList.add(cup);
+    }
 }

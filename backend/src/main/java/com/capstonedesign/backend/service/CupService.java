@@ -19,4 +19,9 @@ public class CupService {
 
         cupRepository.save(cup);
     }
+
+    public Cup getCupInfo(Long cid) {
+
+        return cupRepository.findById(cid).orElse(new Cup());
+    }
 }

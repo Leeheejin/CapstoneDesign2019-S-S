@@ -10,7 +10,9 @@ public class Cup {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    private Long cid;
+
+    private Long uid;
 
     @Column(nullable = false)
     private String cupName;

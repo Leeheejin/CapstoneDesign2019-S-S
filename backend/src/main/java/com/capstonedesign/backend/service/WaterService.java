@@ -4,9 +4,6 @@ import com.capstonedesign.backend.domain.Water;
 import com.capstonedesign.backend.repository.WaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.Tuple;
-
-import java.util.Set;
 
 @Service
 public class WaterService {
@@ -20,11 +17,11 @@ public class WaterService {
 
     public void saveDrinkLog(Water water) {
 
-        waterRepository.saveDrinkLog(water);
+        waterRepository.save(water);
     }
 
-    public Set<Tuple> getDrinkLogWithDate(Water water) {
+    public Water getDrinkLogWithDate(Long wid) {
 
-        return waterRepository.getAllDrinkLog(water);
+        return waterRepository.findById(wid).orElse(new Water());
     }
 }

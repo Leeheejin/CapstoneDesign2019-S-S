@@ -6,9 +6,6 @@ import com.capstonedesign.backend.service.WaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import redis.clients.jedis.Tuple;
-
-import java.util.Set;
 
 @CrossOrigin(origins = "*")
 @Controller
@@ -19,6 +16,7 @@ public class WaterController {
 
     @Autowired
     public WaterController(WaterService waterService, UserService userService) {
+
         this.waterService = waterService;
         this.userService = userService;
     }
@@ -36,8 +34,8 @@ public class WaterController {
     }
 
     @GetMapping(path ="/getdrinkhistory")
-    public Set<Tuple> getDrinkHistory(@RequestBody Water water) {
+    public Water getDrinkHistory(@RequestBody Water water) {
 
-        return waterService.getDrinkLogWithDate(water);
+        return waterService.getDrinkLogWithDate(water.getWid());
     }
 }

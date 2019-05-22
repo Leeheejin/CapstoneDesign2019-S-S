@@ -20,19 +20,34 @@ public class CupController {
 
     @Autowired
     public CupController(CupService cupService, UserService userService) {
+
         this.cupService = cupService;
         this.userService = userService;
     }
 
-    @PostMapping(path = "/savecupinfo")
-    public void saveCupInfo(@RequestBody Cup cup) {
+    @PostMapping(path = "/savecup")
+    public Cup saveCup(@RequestBody Cup cup) {
 
         cupService.saveCupInfo(cup);
+
+        return cupService.getCupInfo(cup.getCid());
     }
 
-    @GetMapping(path = "/currentcup")
-    public Long getCurrentCup(@RequestBody Account account) {
+    @PostMapping(path = "/changecup")
+    public Cup changeCup(@RequestBody Cup cup) {
 
-        return userService.getCurrentProductId(account);
+        Account account = userService.getUserInfo(cup.getUid());
+        account.setCurrentCup(cup);
+        account.addCupInList(cup);
+
+        userService.saveUserInfo(account);
+
+        return cupService.getCupInfo(cup.getCid());
+    }
+
+    @GetMapping(path = "/cupinfo")
+    public Cup cupInfo(@RequestBody Cup cup) {
+
+        return cupService.getCupInfo(cup.getCid());
     }
 }

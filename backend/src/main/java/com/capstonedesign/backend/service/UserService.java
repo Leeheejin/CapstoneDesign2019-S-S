@@ -1,7 +1,6 @@
 package com.capstonedesign.backend.service;
 
 import com.capstonedesign.backend.domain.Account;
-import com.capstonedesign.backend.exception.IdPasswordNotMatchingException;
 import com.capstonedesign.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +20,11 @@ public class UserService {
         userRepository.save(account);
     }
 
+    public void saveUserInfo(Account account) {
+
+        userRepository.save(account);
+    }
+
     public Account getUserInfo(Long id) {
 
         return userRepository.findById(id).orElse(new Account());
@@ -31,28 +35,13 @@ public class UserService {
         return userRepository.findById(id).orElse(new Account()).getOneDrink();
     }
 
-    public void saveCurrentCup(Account account) {
-
-        userRepository.save(account);
-    }
-
     public void saveOneDrink(Account account) {
 
         userRepository.save(account);
     }
 
-    public Long getCurrentProductId(Account account) {
-
-        return account.getPid();
-    }
-
     public boolean isAlreadyExistUserId(Account account) {
 
         return userRepository.existsAccountByUserMid(account.getUserMid());
-    }
-
-    public void changeCurrentProduct(Account account) {
-
-        userRepository.save(account);
     }
 }
