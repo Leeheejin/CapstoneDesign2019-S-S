@@ -29,7 +29,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
-            tools:src="@drawable/cup4"
+            tools:src="@drawable/cup3"
 
             />
 
