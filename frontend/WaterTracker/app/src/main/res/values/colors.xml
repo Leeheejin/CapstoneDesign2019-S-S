@@ -5,4 +5,13 @@
     <color name="colorAccent">#D81B60</color>
     <color name="red">#FF0000</color>
     <color name="skyblue">#00BFFF</color>
+    <color name="orange">#E87F4D </color>
+    <color name="deepgreen">#3A5E48 </color>
+    <color name="graynavy">#2F4A57 </color>
+    <color name="blue">#4F788D </color>
+    <color name="lightblue">#7BA6B4 </color>
+    <color name="lightsky">#A5BFC5 </color>
+    <color name="mint">#74B9B8</color>
+    <color name="graph_red">#ED553B</color>
+    <color name="graph_blue">#3CAEA3</color>
 </resources>

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".History">
+    tools:context=".History"
+    >
 
 
     <TextView
@@ -14,20 +15,26 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:text="Daily Training"
+        android:textColor="#000000"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTintMode="multiply"/>
 
     <HorizontalScrollView
         android:id="@+id/sv_layout"
         android:layout_weight="1"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#37D3D2D2"
+        >
         <LinearLayout
             android:id="@+id/ll_layout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+
+            >
 
 
             <com.github.mikephil.charting.charts.BarChart
@@ -49,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="256dp"
+        android:layout_marginTop="265dp"
         android:text="My Goal"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,18 +71,7 @@
         android:layout_marginTop="320dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/color_water" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="64dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="520dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/color_water" />
+        app:srcCompat="@drawable/raindrop" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -86,7 +82,20 @@
         android:layout_marginTop="420dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/color_water" />
+        app:srcCompat="@drawable/raindrop" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="64dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="520dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/raindrop" />
+
+
 
     <TextView
         android:id="@+id/textView10"
@@ -162,42 +171,53 @@
         android:id="@+id/progress_goal_week"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="287dp"
-        android:layout_height="24dp"
+        android:layout_height="40dp"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="348dp"
+        android:layout_marginTop="340dp"
         android:layout_weight="2"
         android:max="7"
         android:paddingTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:progressDrawable="@drawable/progressbar_custom"
+        android:theme="@style/progressbar_2"
+        />
 
     <ProgressBar
         android:id="@+id/progress_goal_30day"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="288dp"
-        android:layout_height="24dp"
+        android:layout_height="40dp"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="448dp"
+        android:layout_marginTop="440dp"
         android:layout_weight="2"
         android:max="30"
         android:paddingTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:progressDrawable="@drawable/progressbar_custom2"
+        android:theme="@style/progressbar_2"/>
 
     <ProgressBar
         android:id="@+id/progress_goal_100day"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="287dp"
-        android:layout_height="24dp"
+        android:layout_height="40dp"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="548dp"
+        android:layout_marginTop="540dp"
         android:layout_weight="2"
         android:max="100"
         android:paddingTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:progressDrawable="@drawable/progressbar_custom3"
+        android:theme="@style/progressbar_2"
+
+        />
+
+
 
 </android.support.constraint.ConstraintLayout>

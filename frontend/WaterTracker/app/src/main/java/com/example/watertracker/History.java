@@ -101,15 +101,15 @@ public class History extends AppCompatActivity {
 
         //TestData
         ArrayList<Float> dummyVals = new ArrayList<Float>();
-        dummyVals.add(100.5f);
+        dummyVals.add(109.5f);
         dummyVals.add(96.2f);
         dummyVals.add(106.7f);
         dummyVals.add(103.5f);
-        dummyVals.add(102.1f);
-        dummyVals.add(100.7f);
+        dummyVals.add(122.1f);
+        dummyVals.add(110.7f);
         dummyVals.add(89.9f);
         dummyVals.add(104.3f);
-        dummyVals.add(98.2f);
+        dummyVals.add(68.2f);
         dummyVals.add(101.2f);
 
 
@@ -138,8 +138,8 @@ public class History extends AppCompatActivity {
 
 
         MyBarDataSet dataset = new MyBarDataSet(vals,"");
-        dataset.setColors(new int[]{ContextCompat.getColor(this, R.color.red),
-                                ContextCompat.getColor(this, R.color.skyblue)});
+        dataset.setColors(new int[]{ContextCompat.getColor(this, R.color.graph_red),
+                                ContextCompat.getColor(this, R.color.graph_blue)});
         dataset.setAxisDependency(YAxis.AxisDependency.LEFT);
         dataset.setBarSpacePercent(30f);
 

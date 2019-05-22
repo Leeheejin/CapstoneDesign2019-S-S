@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +100,9 @@ public class MainActivity extends AppCompatActivity
         }  else if(90 <= dailyPercent){
             waterdrop.setImageResource(R.drawable.waterdrop30);
         }
+
+
+
 
     }
 
