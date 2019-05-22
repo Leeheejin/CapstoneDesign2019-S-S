@@ -19,8 +19,6 @@ public class Water {
 
     private Long cid;
 
-    private String userMid;
-
     private Integer waterDrink;
 
 

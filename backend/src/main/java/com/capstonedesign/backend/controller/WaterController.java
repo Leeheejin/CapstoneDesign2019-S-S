@@ -4,11 +4,10 @@ import com.capstonedesign.backend.domain.Water;
 import com.capstonedesign.backend.service.UserService;
 import com.capstonedesign.backend.service.WaterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
-@Controller
+@RestController
 public class WaterController {
 
     private final WaterService waterService;
