@@ -24,9 +24,6 @@ public class Account {
     private String userMid;
 
     @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false)
     private Integer weight;
 
     private Integer recommendDrink;
@@ -38,10 +35,4 @@ public class Account {
     private Long registerDate;
 
     private List<Cup> cupList;
-
-    //Check Password
-    //TODO : NOT Encrypted!!!!
-    public boolean matchPassword(String password) {
-        return this.password.equals(password);
-    }
 }

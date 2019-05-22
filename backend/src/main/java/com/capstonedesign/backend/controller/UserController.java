@@ -22,11 +22,6 @@ public class UserController {
 
         if(!userService.isAlreadyExistUserId(account)) {
 
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-            account.setPassword(passwordEncoder.encode(account.getPassword()));
-            account.setRegisterDate(System.currentTimeMillis());
-
             userService.createNewAccount(account);
         }
     }
