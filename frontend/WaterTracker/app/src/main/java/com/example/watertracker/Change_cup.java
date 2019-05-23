@@ -35,7 +35,7 @@ public class Change_cup extends AppCompatActivity {
         cupInfoArrayList.add(new CupInfo(R.drawable.cup2, "나의 컵2"));
         cupInfoArrayList.add(new CupInfo(R.drawable.cup3, "나의 컵3"));
         cupInfoArrayList.add(new CupInfo(R.drawable.cup4, "나의 컵4"));
-        cupInfoArrayList.add(new CupInfo(R.drawable.glass_water, "나의 컵5"));
+        cupInfoArrayList.add(new CupInfo(R.drawable.cup5, "나의 컵5"));
 
         MyAdapter myAdapter = new MyAdapter(cupInfoArrayList);
 
