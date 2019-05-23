@@ -27,7 +27,7 @@ public class Account {
     @OneToOne(targetEntity = Cup.class, fetch = FetchType.EAGER)
     private Cup currentCup;
 
-    @OneToMany(targetEntity=Cup.class, fetch=FetchType.LAZY)
+    @OneToMany(targetEntity=Cup.class, fetch=FetchType.EAGER)
     private List<Cup> cupList = new ArrayList<>();
 
     public void addCupInList(Cup cup) {

@@ -81,9 +81,18 @@ public class CupController {
     @PostMapping(path = "/cupdelete")
     public Account deleteCup(@RequestBody Cup cup) {
 
-        Long id = cup.getUid();
+        Account account = userService.getUserInfo(cup.getUid());
+        Cup toDeleteCup = cupService.getCupInfo(cup.getCid());
+        account.getCupList().remove(toDeleteCup);
+
+        if (account.getCurrentCup() != null) {
+            if (account.getCurrentCup().getCid().equals(cup.getCid())) {
+                account.setCurrentCup(null);
+            }
+        }
+
+        userService.saveUserInfo(account);
         cupService.deleteCup(cup);
-        Account account = userService.getUserInfo(id);
 
         return account;
     }
