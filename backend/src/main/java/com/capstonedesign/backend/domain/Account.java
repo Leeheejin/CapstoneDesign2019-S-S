@@ -24,7 +24,7 @@ public class Account {
 
     private Integer oneDrink;
 
-    @OneToOne(targetEntity = Cup.class, fetch = FetchType.LAZY)
+    @OneToOne(targetEntity = Cup.class, fetch = FetchType.EAGER)
     private Cup currentCup;
 
     @OneToMany(targetEntity=Cup.class, fetch=FetchType.LAZY)

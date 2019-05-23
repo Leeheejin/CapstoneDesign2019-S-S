@@ -32,13 +32,30 @@ public class UserController {
     @PostMapping(path = "/confirm")
     public Account confirm(@RequestBody Account account) {
 
+        Account oldAccountData = userService.getUserInfo(account.getId());
+        if (!oldAccountData.getCupList().isEmpty()) {
+            account.setCupList(oldAccountData.getCupList());
+        }
+
+        if (oldAccountData.getCurrentCup() != null) {
+            account.setCurrentCup(oldAccountData.getCurrentCup());
+        }
+
+        if (oldAccountData.getRecommendDrink() != null) {
+            account.setRecommendDrink(oldAccountData.getRecommendDrink());
+        }
+
+        if (oldAccountData.getOneDrink() != null) {
+            account.setOneDrink(oldAccountData.getOneDrink());
+        }
+
         userService.saveUserInfo(account);
 
         return userService.getUserInfo(account.getId());
     }
 
     @GetMapping(path = "/userinfo")
-    public Account userInfo(@RequestBody Account account) {
+    public Account getUserInfo(@RequestBody Account account) {
 
         return userService.getUserInfo(account.getId());
     }

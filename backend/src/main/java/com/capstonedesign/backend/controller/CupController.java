@@ -24,6 +24,8 @@ public class CupController {
     @PostMapping(path = "/savecup")
     public Cup saveCup(@RequestBody Cup cup) {
 
+        Account account = userService.getUserInfo(cup.getUid());
+        account.addCupInList(cup);
         cupService.saveCupInfo(cup);
 
         return cupService.getCupInfo(cup.getCid());
@@ -34,7 +36,6 @@ public class CupController {
 
         Account account = userService.getUserInfo(cup.getUid());
         account.setCurrentCup(cup);
-        account.addCupInList(cup);
 
         userService.saveUserInfo(account);
 
@@ -42,8 +43,48 @@ public class CupController {
     }
 
     @GetMapping(path = "/cupinfo")
-    public Cup cupInfo(@RequestBody Cup cup) {
+    public Cup getCupInfo(@RequestBody Cup cup) {
 
         return cupService.getCupInfo(cup.getCid());
+    }
+
+    @PostMapping(path = "/cupedit")
+    public Cup changeCupInfo(@RequestBody Cup cup) {
+
+        Cup oldCupData = cupService.getCupInfo(cup.getCid());
+
+        if (cup.getCupName() == null) {
+            cup.setCupName(oldCupData.getCupName());
+        }
+
+        if (cup.getCupWeight() == null) {
+            cup.setCupWeight(oldCupData.getCupWeight());
+        }
+
+        Account account = userService.getUserInfo(cup.getUid());
+
+        if (account.getCurrentCup().getCid().equals(cup.getCid())) {
+            account.setCurrentCup(cup);
+        }
+
+        Cup toDeleteCup = cupService.getCupInfo(cup.getCid());
+
+        account.getCupList().remove(toDeleteCup);
+        account.addCupInList(cup);
+
+        cupService.saveCupInfo(cup);
+        userService.saveUserInfo(account);
+
+        return cupService.getCupInfo(cup.getCid());
+    }
+
+    @PostMapping(path = "/cupdelete")
+    public Account deleteCup(@RequestBody Cup cup) {
+
+        Long id = cup.getUid();
+        cupService.deleteCup(cup);
+        Account account = userService.getUserInfo(id);
+
+        return account;
     }
 }

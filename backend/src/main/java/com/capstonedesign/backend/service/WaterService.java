@@ -5,6 +5,8 @@ import com.capstonedesign.backend.repository.WaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class WaterService {
 
@@ -17,11 +19,17 @@ public class WaterService {
 
     public void saveDrinkLog(Water water) {
 
+        water.addWaterLog(water.getLastDrink());
         waterRepository.save(water);
     }
 
-    public Water getDrinkLogWithDate(Long wid) {
+    public ArrayList<Integer> getDrinkLogWithDate(Water water) {
 
-        return waterRepository.findById(wid).orElse(new Water());
+        return waterRepository.findWaterByUidAndAndCid(water.getUid(), water.getCid()).getWaterDrinkData();
+    }
+
+    public Water getWaterDrinkPerData(Water water) {
+
+        return waterRepository.findById(water.getWid()).orElse(new Water());
     }
 }

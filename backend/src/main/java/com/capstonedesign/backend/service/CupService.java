@@ -24,4 +24,9 @@ public class CupService {
 
         return cupRepository.findById(cid).orElse(new Cup());
     }
+
+    public void deleteCup(Cup cup) {
+
+        cupRepository.deleteById(cup.getCid());
+    }
 }
