@@ -17,7 +17,7 @@ import com.example.watertracker.databinding.RecyclerViewRowBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Change_cup extends AppCompatActivity {
+public class Change_cup2 extends AppCompatActivity {
 
     private List<String> mList = new ArrayList<>();
     private ActivityChangeCupBinding mBinding;
@@ -44,7 +44,7 @@ public class Change_cup extends AppCompatActivity {
 
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                RecyclerViewRowBinding binding = DataBindingUtil.inflate(LayoutInflater.from(Change_cup.this), R.layout.recycler_view_row, parent, false);
+                RecyclerViewRowBinding binding = DataBindingUtil.inflate(LayoutInflater.from(Change_cup2.this), R.layout.recycler_view_row, parent, false);
                 return new CustViewHolder(binding);
             }
 
@@ -99,7 +99,7 @@ public class Change_cup extends AppCompatActivity {
     private void showToast(String msg) {
         if (mToast != null) mToast.cancel();
 
-        mToast = Toast.makeText(Change_cup.this, "삭제되었습니다.", Toast.LENGTH_SHORT);
+        mToast = Toast.makeText(Change_cup2.this, msg, Toast.LENGTH_SHORT);
         mToast.show();
     }
 }
