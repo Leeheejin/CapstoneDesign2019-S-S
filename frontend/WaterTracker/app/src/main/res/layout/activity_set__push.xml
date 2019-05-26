@@ -44,8 +44,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:thumb="@drawable/customswitchseletor"
-                android:track="@drawable/custom_track"
+                android:thumb="@drawable/switch_track_selector"
+                android:track="@drawable/switch_thumb"
                 />
 
         </LinearLayout>
@@ -155,8 +155,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:thumb="@drawable/customswitchseletor"
-                android:track="@drawable/custom_track"
+                android:thumb="@drawable/switch_track_selector"
+                android:track="@drawable/switch_thumb"
                 />
         </LinearLayout>
         <View

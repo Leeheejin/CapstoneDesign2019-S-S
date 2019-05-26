@@ -22,7 +22,7 @@ public class BroadcastD extends BroadcastReceiver {
             NotificationManager notificationmanager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
             Notification.Builder builder = new Notification.Builder(context);
-            builder.setSmallIcon(R.drawable.color_water).setTicker("HETT").setWhen(System.currentTimeMillis())
+            builder.setSmallIcon(R.drawable.icon1).setTicker("HETT").setWhen(System.currentTimeMillis())
                     .setNumber(1).setContentTitle("물 마실 시간입니다").setContentText("마시는걸 추천드려요")
                     .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE).setContentIntent(pendingIntent).setAutoCancel(true);
 

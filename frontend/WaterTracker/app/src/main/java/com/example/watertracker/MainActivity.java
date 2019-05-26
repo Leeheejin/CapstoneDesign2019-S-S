@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.water_prog);
         progressBar.setMax(100);
         progressBar.setProgress(30);
-        progressBar.setSecondaryProgress(100);
+        progressBar.setSecondaryProgress(33);
 
         //ImageView waterdrop = (ImageView)findViewById(R.id.img_waterdrop);
 
@@ -307,4 +307,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
 }

@@ -24,7 +24,8 @@
         android:minHeight="60dp"
         android:orientation="horizontal"
         android:paddingEnd="20dp"
-        android:paddingStart="20dp">
+        android:paddingStart="20dp"
+        >
 
         <ImageView
             android:id="@+id/iv_picture"

@@ -30,7 +30,8 @@ public class Change_cup extends AppCompatActivity {
 
         // make sample data
         for (int i = 0; i < 5; i++) {
-            mList.add(String.format("sample item %s", i + 1));
+            mList.add(String.format("나의 컵 %s", i + 1));
+
         }
 
         // init recyclerView

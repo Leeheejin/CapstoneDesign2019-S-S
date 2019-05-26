@@ -1,6 +1,7 @@
 package com.example.watertracker;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,7 +20,9 @@ import java.util.List;
 
 public class Change_cup2 extends AppCompatActivity {
 
-    private List<String> mList = new ArrayList<>();
+    private List<Integer> mList = new ArrayList<>();
+    //private List<String> mList = new ArrayList<>();
+    //private List<CupInfo> mList = new ArrayList<>();
     private ActivityChangeCupBinding mBinding;
     private Toast mToast;
 
@@ -28,10 +31,14 @@ public class Change_cup2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_change_cup);
 
-        // make sample data
+
+
+// make sample data
         for (int i = 0; i < 5; i++) {
-            mList.add(String.format("sample item %s", i + 1));
+            //mList.add(String.format("나의 컵 %s", i + 1));
+            mList.add(Integer.valueOf("R.id.cup%s", i + 1));
         }
+
 
         // init recyclerView
         mBinding.recyclerView1.setLayoutManager(new LinearLayoutManager(this));
@@ -39,7 +46,7 @@ public class Change_cup2 extends AppCompatActivity {
             @Override
             public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
                 CustViewHolder holder1 = (CustViewHolder) holder;
-                holder1.setData(mList.get(position));
+                holder1.setImg(mList.get(position));
             }
 
             @Override
@@ -72,9 +79,17 @@ public class Change_cup2 extends AppCompatActivity {
             mBinding = binding;
         }
 
+        public void setFullData(CupInfo data) {
+            mBinding.ivPicture.setImageResource(data.drawableId);
+            mBinding.tvName.setText(data.cupname);
+        }
         public void setData(String data) {
             mBinding.tvName.setText(data);
         }
+        public void setImg(int img) {
+            mBinding.ivPicture.setImageResource(img);
+        }
+
     }
 
     ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -99,7 +114,7 @@ public class Change_cup2 extends AppCompatActivity {
     private void showToast(String msg) {
         if (mToast != null) mToast.cancel();
 
-        mToast = Toast.makeText(Change_cup2.this, msg, Toast.LENGTH_SHORT);
+        mToast = Toast.makeText(Change_cup2.this, "삭제되었습니다.", Toast.LENGTH_SHORT);
         mToast.show();
     }
 }
