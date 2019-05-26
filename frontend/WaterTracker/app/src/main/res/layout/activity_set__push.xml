@@ -69,11 +69,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <Button
                 android:id="@+id/term"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="간격"
+                android:text="알람 간격 설정"
                 android:textSize="20dp"
                 android:layout_weight="3"
                 />
