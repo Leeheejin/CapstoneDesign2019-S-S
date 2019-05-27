@@ -1,6 +1,7 @@
 package com.capstonedesign.backend.service;
 
 import com.capstonedesign.backend.domain.Account;
+import com.capstonedesign.backend.domain.Water;
 import com.capstonedesign.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,11 +29,6 @@ public class UserService {
     public Account getUserInfo(Long id) {
 
         return userRepository.findById(id).orElse(new Account());
-    }
-
-    public Integer getOneDrink(Long id) {
-
-        return userRepository.findById(id).orElse(new Account()).getOneDrink();
     }
 
     public void saveOneDrink(Account account) {

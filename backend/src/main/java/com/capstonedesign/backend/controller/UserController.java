@@ -65,4 +65,19 @@ public class UserController {
 
         userService.saveOneDrink(account);
     }
+
+    @PostMapping(path = "/access")
+    public void access(@RequestBody Account account) {
+
+        userService.saveOneDrink(account);
+    }
+
+    @PostMapping(path = "/disconnect")
+    public void disconnect(@RequestBody Account account) {
+
+        Account accountToDataInput = userService.getUserInfo(account.getId());
+        accountToDataInput.setAccessTime(account.getAccessTime() - accountToDataInput.getAccessTime());
+
+        userService.saveOneDrink(accountToDataInput);
+    }
 }

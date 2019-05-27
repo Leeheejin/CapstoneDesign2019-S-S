@@ -1,12 +1,11 @@
 package com.capstonedesign.backend.controller;
 
+import com.capstonedesign.backend.domain.Account;
 import com.capstonedesign.backend.domain.Water;
 import com.capstonedesign.backend.service.UserService;
 import com.capstonedesign.backend.service.WaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -25,20 +24,21 @@ public class WaterController {
     @PostMapping(path = "/drink")
     public Water userDrinkPerOneTime(@RequestBody Water water) {
 
+        Account account =  userService.getUserInfo(water.getUid());
+
+        account.setNowDrink(account.getNowDrink()+ water.getLastDrink());
+        account.addLogInList(water.getLastDrink());
+        account.addDateInList(water.getLastDrinkDate());
+
+        userService.saveUserInfo(account);
         waterService.saveDrinkLog(water);
 
-        return waterService.getWaterDrinkPerData(water);
-    }
-
-    @GetMapping(path ="/getdrinkinfo")
-    public Integer getDrinkInfoPerOneTime(@RequestBody Water water) {
-
-        return userService.getOneDrink(water.getCid());
-    }
-
-    @GetMapping(path ="/getdrinkhistory")
-    public ArrayList<Integer> getDrinkHistory(@RequestBody Water water) {
-
         return waterService.getDrinkLogWithDate(water);
+    }
+
+    @GetMapping(path ="/drinkinfo")
+    public Water getDrinkInfoPerOneTime(@RequestBody Water water) {
+
+        return waterService.getOneDrink(water);
     }
 }

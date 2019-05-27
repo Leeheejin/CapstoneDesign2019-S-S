@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WaterRepository extends CrudRepository<Water, Long> {
 
-    Water findWaterByUidAndAndCid(Long uid, Long cid);
 }
 

@@ -20,9 +20,11 @@ public class Account {
     @Column(nullable = false)
     private Integer weight;
 
-    private Integer recommendDrink;
+    private Integer recommendDrink = 0;
 
-    private Integer oneDrink;
+    private Integer oneDrink = 0;
+
+    private Integer nowDrink = 0;
 
     @OneToOne(targetEntity = Cup.class, fetch = FetchType.EAGER)
     private Cup currentCup;
@@ -30,7 +32,21 @@ public class Account {
     @OneToMany(targetEntity=Cup.class, fetch=FetchType.EAGER)
     private List<Cup> cupList = new ArrayList<>();
 
+    private long accessTime;
+
     public void addCupInList(Cup cup) {
         this.cupList.add(cup);
+    }
+
+    private ArrayList<Integer> waterLog = new ArrayList<>();
+
+    private ArrayList<Long> waterLongDate = new ArrayList<>();
+
+    public void addLogInList(Integer drinkData) {
+        this.waterLog.add(drinkData);
+    }
+
+    public void addDateInList(Long drinkDate) {
+        this.waterLongDate.add(drinkDate);
     }
 }
