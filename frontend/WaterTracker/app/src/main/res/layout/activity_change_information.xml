@@ -12,7 +12,7 @@
     android:weightSum="15"
     >
     <TextView
-        android:layout_weight="3"
+        android:layout_weight="2.5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Profile"
@@ -92,7 +92,8 @@
                 android:text="남자"
                 android:layout_weight="1"
                 android:layout_marginRight="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:backgroundTint="@color/orange"/>
 
             <RadioButton
                 android:id="@+id/check_fm"
@@ -137,8 +138,7 @@
             android:text="Kg   "
             android:textColor="#000000"
             android:textSize="15dp"
-            android:inputType="number"
-            />
+                        />
     </LinearLayout>
 
 
