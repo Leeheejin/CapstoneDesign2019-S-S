@@ -1,6 +1,7 @@
 package com.example.watertracker;
 
 import android.databinding.DataBindingUtil;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.watertracker.databinding.ActivityChangeCupBinding;
@@ -23,6 +25,11 @@ public class Change_cup extends AppCompatActivity {
     private ActivityChangeCupBinding mBinding;
     private Toast mToast;
 
+    private ArrayList<Integer> cupInfoArrayList = new ArrayList<>();
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +40,11 @@ public class Change_cup extends AppCompatActivity {
             mList.add(String.format("나의 컵 %s", i + 1));
 
         }
+        cupInfoArrayList.add(R.drawable.cup1);
+        cupInfoArrayList.add(R.drawable.cup2);
+        cupInfoArrayList.add(R.drawable.cup3);
+        cupInfoArrayList.add(R.drawable.cup4);
+        cupInfoArrayList.add(R.drawable.cup5);
 
         // init recyclerView
         mBinding.recyclerView1.setLayoutManager(new LinearLayoutManager(this));
@@ -41,6 +53,8 @@ public class Change_cup extends AppCompatActivity {
             public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
                 CustViewHolder holder1 = (CustViewHolder) holder;
                 holder1.setData(mList.get(position));
+                holder1.setImage(cupInfoArrayList.get(position));
+
             }
 
             @Override
@@ -73,9 +87,11 @@ public class Change_cup extends AppCompatActivity {
             mBinding = binding;
         }
 
+
         public void setData(String data) {
             mBinding.tvName.setText(data);
         }
+        public  void setImage(int image) { mBinding.ivPicture.setImageResource(image);}
     }
 
     ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
