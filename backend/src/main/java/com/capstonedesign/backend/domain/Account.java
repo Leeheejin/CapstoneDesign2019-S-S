@@ -14,9 +14,6 @@ public class Account {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String userMid;
-
     @Column(nullable = false)
     private Integer weight;
 
