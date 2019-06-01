@@ -53,6 +53,10 @@ public class MainActivity extends AppCompatActivity
     public Water water = new Water();
 
     public static Context mContext;
+    public TextView remainToGoal;
+    public int remaintogoal;
+    public int dailySum;
+    public float dailyGoal;
 
 
     @Override
@@ -97,18 +101,18 @@ public class MainActivity extends AppCompatActivity
         float user_weight = 70;
         //TODO : 이 부분이 어플 실행 시 어느 시점인지 모름 account.setWeight((int) user_weight);
 
-        float dailyGoal = account.getRecommendDrink(); //TODO:  일일 권장량, 서버에서 LOAD , SET_ALLO 페이지에서 서버로 입력
+        dailyGoal = account.getRecommendDrink(); //TODO:  일일 권장량, 서버에서 LOAD , SET_ALLO 페이지에서 서버로 입력
 
         //dailyGoal = user_weight * 30;
 
-        int dailySum = account.getNowDrink();  //TODO: 일일 누적 음수량, 서버에서 LOAD
+        dailySum = account.getNowDrink();  //TODO: 일일 누적 음수량, 서버에서 LOAD
 
         int dailyPercent =  (int)((dailySum/dailyGoal) *100); // 일일 누적 달성량
         int remaintogoal = (int)dailyGoal - dailySum; // 목표달성까지 남은 음수량
 
 
 
-        TextView remainToGoal = (TextView)findViewById(R.id.txt_remaintToGoal);
+        remainToGoal = (TextView)findViewById(R.id.txt_remaintToGoal);
         remainToGoal.setText("목표 달성까지 " + remaintogoal + "mL"  );
 
 

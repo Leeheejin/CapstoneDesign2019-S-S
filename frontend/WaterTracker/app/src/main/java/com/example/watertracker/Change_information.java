@@ -2,11 +2,16 @@ package com.example.watertracker;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class Change_information extends AppCompatActivity {
     //String userName; //TODO : user name
-    int weight = 0; //TODO : Weight
+    public int weight;
 
     // 싱글톤 패턴을 사용하여 이 어플리케이션에서 전역으로 사용하는 하나의 변수를 접근하기 위한 방법
     // ((MainActivity)MainActivity.mContext) 에 . 을 찍어서 해당 변수, 혹은 함수에 접근할 수 있음
@@ -45,8 +50,9 @@ public class Change_information extends AppCompatActivity {
     // 과 같이 전송해야 정상 처리 됨. 만약 uid,cid를 포함하지 않고 전송 시에는 오류를 반환함.
 
 
-    int avg_drop = 0; //TODO : 평균 한 모금 설정
+    //int avg_drop = 0; //TODO : 평균 한 모금 설정
     Button btn;
+    EditText putweight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,53 @@ public class Change_information extends AppCompatActivity {
         setContentView(R.layout.activity_change_information);
 
         weight = ((MainActivity)MainActivity.mContext).account.getWeight();
-        avg_drop = ((MainActivity)MainActivity.mContext).account.getOneDrink();
+        //avg_drop = ((MainActivity)MainActivity.mContext).account.getOneDrink();
+
+        putweight = (EditText) findViewById(R.id.put_weight);
+
+        putweight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try{
+
+                    weight= Integer.parseInt((s.toString()));
+
+                } catch(Exception ex) {}
+
+            }
+        });
+
+        btn = (Button)findViewById(R.id.btn_edit);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((MainActivity)MainActivity.mContext).account.setWeight(weight);
+                ((MainActivity)MainActivity.mContext).confirm();
+
+                ((MainActivity)MainActivity.mContext).remaintogoal = (int)((MainActivity)MainActivity.mContext).dailyGoal - ((MainActivity)MainActivity.mContext).dailySum;
+                ((MainActivity)MainActivity.mContext).remainToGoal.setText("목표 달성까지 " + ((MainActivity)MainActivity.mContext).remaintogoal + "mL"  );
+
+
+                Toast.makeText(getApplicationContext(),"수정완료",Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+
+
+
+
     }
 }
