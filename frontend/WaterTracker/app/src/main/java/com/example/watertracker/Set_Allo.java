@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,13 +13,17 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.watertracker.domain.Account;
+
 public class Set_Allo extends AppCompatActivity {
 
     SeekBar seekbar;
     EditText outcome;
     public int dailyGoal = ((MainActivity)MainActivity.mContext).account.getRecommendDrink(); //TODO: 일일 권장량 , 서버에 입력 (메인액티비티에서 사용)
     Button btn;
+    Account account = ((MainActivity)MainActivity.mContext).account;
 
+    private static final String TAG = "SetActivity";
 
 
     @Override
@@ -91,6 +96,8 @@ public class Set_Allo extends AppCompatActivity {
                 ((MainActivity)MainActivity.mContext).remainToGoal.setText("목표 달성까지 " + ((MainActivity)MainActivity.mContext).remaintogoal + "mL"  );
 
                 Toast.makeText(getApplicationContext(),"수정완료",Toast.LENGTH_LONG).show();
+
+                Log.d(TAG, "Setting Page's Account Info: " + account.toString());
             }
         });
     }

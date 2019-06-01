@@ -32,15 +32,15 @@ public class UserController {
             account.setCupList(oldAccountData.getCupList());
         }
 
-        if (oldAccountData.getCurrentCup() != null) {
+        if (account.getCurrentCup() == null) {
             account.setCurrentCup(oldAccountData.getCurrentCup());
         }
 
-        if (oldAccountData.getRecommendDrink() != null) {
+        if (account.getRecommendDrink() == null) {
             account.setRecommendDrink(oldAccountData.getRecommendDrink());
         }
 
-        if (oldAccountData.getOneDrink() != null) {
+        if (account.getOneDrink() == null) {
             account.setOneDrink(oldAccountData.getOneDrink());
         }
 

@@ -37,7 +37,17 @@ public class Change_cup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_change_cup);
 
+        for (int i = 0; i < ((MainActivity)MainActivity.mContext).account.getCupList().size(); i++) {
+            mList.add(String.format("My Cup %s", i + 1));
+
+        }
+
+        //for (int i = 0; i < 5; i++) {
+        //    cupInfoArrayList.add(R.drawable.cup);
+
+        //}
         // make sample data
+        /*
         for (int i = 0; i < 5; i++) {
             mList.add(String.format("My Cup %s", i + 1));
 
@@ -47,6 +57,8 @@ public class Change_cup extends AppCompatActivity {
         cupInfoArrayList.add(R.drawable.cup3);
         cupInfoArrayList.add(R.drawable.cup4);
         cupInfoArrayList.add(R.drawable.cup5);
+
+        */
 
         // init recyclerView
         mBinding.recyclerView1.setLayoutManager(new LinearLayoutManager(this));
