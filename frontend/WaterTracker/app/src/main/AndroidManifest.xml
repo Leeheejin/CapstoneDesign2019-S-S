@@ -13,7 +13,6 @@
 
         <activity android:name=".History"></activity>
         <activity android:name=".Set_Allo" />
-        <activity android:name=".Set_Push" />
         <activity android:name=".Change_cup" />
         <activity android:name=".Change_information" />
         <activity

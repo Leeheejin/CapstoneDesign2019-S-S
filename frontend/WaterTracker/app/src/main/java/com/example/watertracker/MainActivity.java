@@ -1,14 +1,20 @@
 package com.example.watertracker;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
@@ -52,8 +58,6 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -75,12 +79,12 @@ public class MainActivity extends AppCompatActivity
         TextView date = (TextView)findViewById(R.id.txt_date);
         date.setText(strDate);
 
-        float user_weight = 70; // 유저 몸무게
-        float dailyGoal = 0; // 일일 권장량
+        float user_weight = 70;
+        float dailyGoal = 0; //TODO:  일일 권장량, 서버에서 LOAD , SET_ALLO 페이지에서 서버로 입력
 
         dailyGoal = user_weight * 30;
 
-        int dailySum = 700;  // 일일 누적 음수량
+        int dailySum = 700;  //TODO: 일일 누적 음수량, 서버에서 LOAD
 
         int dailyPercent =  (int)((dailySum/dailyGoal) *100); // 일일 누적 달성량
         int remaintogoal = (int)dailyGoal - dailySum; // 목표달성까지 남은 음수량
@@ -98,35 +102,8 @@ public class MainActivity extends AppCompatActivity
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.water_prog);
         progressBar.setMax(100);
         progressBar.setProgress(30);
-        progressBar.setSecondaryProgress(33);
+        progressBar.setSecondaryProgress(dailyPercent);
 
-        //ImageView waterdrop = (ImageView)findViewById(R.id.img_waterdrop);
-
-        /*
-        if(dailyPercent == 0) {
-            waterdrop.setImageResource(R.drawable.waterdrop);
-        } else if(0<dailyPercent && dailyPercent <= 10){
-            waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(10<dailyPercent && dailyPercent <= 20){
-            waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(20<dailyPercent && dailyPercent <= 30){
-            waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(30<dailyPercent && dailyPercent <= 40){
-            waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(40<dailyPercent && dailyPercent <= 50){
-            waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(50<dailyPercent && dailyPercent <= 60){
-            waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(60<dailyPercent && dailyPercent <= 70){
-            waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(70<dailyPercent && dailyPercent <= 80){
-            waterdrop.setImageResource(R.drawable.waterdrop30);
-        } else if(80<dailyPercent && dailyPercent <= 90){
-            waterdrop.setImageResource(R.drawable.waterdrop30);
-        }  else if(90 <= dailyPercent){
-            waterdrop.setImageResource(R.drawable.waterdrop30);
-        }
-        */
 
         SharedPreferences prefs = getSharedPreferences("PrefName", MODE_PRIVATE);
         alarmSwitch = (Switch) findViewById(R.id.main_switch);
@@ -160,8 +137,11 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-    }
 
+
+
+
+    }
 
 
     public class AlarmHATT {
@@ -219,8 +199,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-
-
     }
     public void term_set() {
         final String[] items = new String[]{"10분", "20분", "30분", "40분", "50분", "60분"};
@@ -246,7 +224,7 @@ public class MainActivity extends AppCompatActivity
                         SharedPreferences.Editor ed2 = prefs2.edit();
                         switch (items[selectedindex[0]]) {
                             case "10분":
-                                ed2.putInt("term", 1);
+                                ed2.putInt("term", 10);
                                 ed2.commit();
                                 new AlarmHATT(getApplicationContext()).cancelAlarm(0);
                                 new AlarmHATT(getApplicationContext()).Alarm(prefs2.getInt("term", 60));

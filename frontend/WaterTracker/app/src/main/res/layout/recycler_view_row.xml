@@ -4,7 +4,7 @@
 
 <android.support.v7.widget.CardView
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="60dp"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="5dp"
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:minHeight="60dp"
+        android:minHeight="50dp"
         android:orientation="horizontal"
         android:paddingEnd="20dp"
         android:paddingStart="20dp"

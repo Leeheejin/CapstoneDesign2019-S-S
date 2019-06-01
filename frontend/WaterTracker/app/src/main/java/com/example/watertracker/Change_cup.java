@@ -23,11 +23,10 @@ import java.util.List;
 
 public class Change_cup extends AppCompatActivity {
 
-    private List<String> mList = new ArrayList<>();
+    private List<String> mList = new ArrayList<>(); //TODO : cup Name
     private ActivityChangeCupBinding mBinding;
     private Toast mToast;
-
-    private ArrayList<Integer> cupInfoArrayList = new ArrayList<>();
+    private ArrayList<Integer> cupInfoArrayList = new ArrayList<>(); //TODO: cup Image
 
 
     @Override
