@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="230dp"
-    android:paddingHorizontal="40dp"
+    android:layout_height="210dp"
+    android:paddingHorizontal="30dp"
     android:background="@drawable/backgr1"
     android:gravity="bottom"
     android:orientation="vertical"
@@ -15,8 +15,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@drawable/ico2" />
@@ -28,6 +28,8 @@
         android:text="WaterTracker"
         android:textColor="#ffffff"
         android:textSize="20dp"
+        android:textStyle="normal"
+        android:fontFamily="@font/pacifico"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <LinearLayout
@@ -42,12 +44,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
-        android:text="2019-1  Capstone Design Project"
-        android:textStyle="normal"
+        android:text=" 2019-1  Capstone Design Project"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/digitalClock1" />
+        app:layout_constraintTop_toBottomOf="@+id/digitalClock1"
+        android:textStyle="normal"
+        android:fontFamily="@font/dosis_medium"/>
 
 
 

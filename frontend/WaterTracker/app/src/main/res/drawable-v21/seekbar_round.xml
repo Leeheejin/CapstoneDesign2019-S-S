@@ -5,7 +5,7 @@
     android:useLevel="false"  >
     <!-- 배경 -->
     <solid
-        android:color="@color/graynavy"/>
+        android:color="#307F88"/>
     <!-- 테두리 -->
     <stroke
         android:width="5dp"

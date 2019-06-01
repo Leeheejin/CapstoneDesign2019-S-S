@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -158,11 +160,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
-
-
-
     }
+
 
 
     public class AlarmHATT {
@@ -220,6 +219,8 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+
+
     }
     public void term_set() {
         final String[] items = new String[]{"10분", "20분", "30분", "40분", "50분", "60분"};
