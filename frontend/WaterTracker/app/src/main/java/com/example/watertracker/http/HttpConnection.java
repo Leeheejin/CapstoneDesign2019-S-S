@@ -101,6 +101,19 @@ public class HttpConnection {
         client.newCall(request);
     }
 
+    public void cupInfo(Cup cup) {
+
+        Gson gson = new Gson();
+        String json = gson.toJson(cup);
+
+        Request request = new Request.Builder()
+                .url("http://192.168.43.157:8080/cupInfo")
+                .post(RequestBody.create(MediaType.parse("application/json"), json))
+                .build();
+
+        client.newCall(request);
+    }
+
     public void drinkWater(Water water, Callback callback) {
 
         Gson gson = new Gson();
