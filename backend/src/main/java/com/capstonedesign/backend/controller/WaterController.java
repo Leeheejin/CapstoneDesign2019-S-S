@@ -36,7 +36,7 @@ public class WaterController {
         return waterService.getDrinkLogWithDate(water);
     }
 
-    @GetMapping(path ="/drinkinfo")
+    @PostMapping(path ="/drinkinfo")
     public Water getDrinkInfoPerOneTime(@RequestBody Water water) {
 
         return waterService.getOneDrink(water);

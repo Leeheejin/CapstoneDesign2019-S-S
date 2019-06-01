@@ -54,9 +54,8 @@ public class UserController {
         return userService.getUserInfo(account.getId());
     }
 
-    @GetMapping(path = "/userinfo")
+    @PostMapping(path = "/userinfo")
     public Account getUserInfo(@RequestBody Account account) {
-
         return userService.getUserInfo(account.getId());
     }
 

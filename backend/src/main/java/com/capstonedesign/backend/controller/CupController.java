@@ -42,7 +42,7 @@ public class CupController {
         return cupService.getCupInfo(cup.getCid());
     }
 
-    @GetMapping(path = "/cupinfo")
+    @PostMapping(path = "/cupinfo")
     public Cup getCupInfo(@RequestBody Cup cup) {
 
         return cupService.getCupInfo(cup.getCid());
