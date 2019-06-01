@@ -1,4 +1,4 @@
-package com.example.watertracker.http;
+package com.example.watertracker;
 
 import com.example.watertracker.domain.Account;
 import com.example.watertracker.domain.Cup;
