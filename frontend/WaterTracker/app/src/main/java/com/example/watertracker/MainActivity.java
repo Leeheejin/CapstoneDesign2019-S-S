@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     private Switch alarmSwitch;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,12 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        SharedPreferences prefs2 = getSharedPreferences("PushTerm", MODE_PRIVATE);
+        int term = prefs2.getInt("term", 60);
+
+        new AlarmHATT(getApplicationContext()).Alarm(term); // Alarm default
+
 
         SimpleDateFormat datef = new SimpleDateFormat("yyyy년 MM월 dd일");
         Calendar c1 = Calendar.getInstance();
@@ -157,14 +164,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        Intent intent = getIntent();
-        int term = intent.getIntExtra("알림간격",60);
-        new AlarmHATT(getApplicationContext()).Alarm(term);
-    }
 
     public class AlarmHATT {
         private Context context;
@@ -242,31 +241,44 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(MainActivity.this, MainActivity.class);
-
+                        SharedPreferences prefs2 = getSharedPreferences("PushTerm", MODE_PRIVATE);
+                        SharedPreferences.Editor ed2 = prefs2.edit();
                         switch (items[selectedindex[0]]) {
                             case "10분":
+                                ed2.putInt("term", 1);
+                                ed2.commit();
                                 new AlarmHATT(getApplicationContext()).cancelAlarm(0);
-                                new AlarmHATT(getApplicationContext()).Alarm(10);
+                                new AlarmHATT(getApplicationContext()).Alarm(prefs2.getInt("term", 60));
                                 break;
                             case "20분":
+                                ed2.putInt("term", 20);
+                                ed2.commit();
                                 new AlarmHATT(getApplicationContext()).cancelAlarm(0);
-                                new AlarmHATT(getApplicationContext()).Alarm(20);
+                                new AlarmHATT(getApplicationContext()).Alarm(prefs2.getInt("term", 60));
                                 break;
                             case "30분":
+                                ed2.putInt("term", 30);
+                                ed2.commit();
                                 new AlarmHATT(getApplicationContext()).cancelAlarm(0);
-                                new AlarmHATT(getApplicationContext()).Alarm(30);
+                                new AlarmHATT(getApplicationContext()).Alarm(prefs2.getInt("term", 60));
                                 break;
                             case "40분":
+                                ed2.putInt("term", 40);
+                                ed2.commit();
                                 new AlarmHATT(getApplicationContext()).cancelAlarm(0);
-                                new AlarmHATT(getApplicationContext()).Alarm(40);
+                                new AlarmHATT(getApplicationContext()).Alarm(prefs2.getInt("term", 60));
                                 break;
                             case "50분":
+                                ed2.putInt("term", 50);
+                                ed2.commit();
                                 new AlarmHATT(getApplicationContext()).cancelAlarm(0);
-                                new AlarmHATT(getApplicationContext()).Alarm(50);
+                                new AlarmHATT(getApplicationContext()).Alarm(prefs2.getInt("term", 60));
                                 break;
                             case "60분":
+                                ed2.putInt("term", 60);
+                                ed2.commit();
                                 new AlarmHATT(getApplicationContext()).cancelAlarm(0);
-                                new AlarmHATT(getApplicationContext()).Alarm(60);
+                                new AlarmHATT(getApplicationContext()).Alarm(prefs2.getInt("term", 60));
                                 break;
                         }
 
