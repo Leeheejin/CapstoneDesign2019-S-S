@@ -41,14 +41,13 @@
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
             android:layout_gravity="center_vertical"
-            android:textSize="20dp"
-            tools:text="My Cup 1"
             android:layout_weight="2"
-            android:textColor="#8F171A1B"
             android:fontFamily="@font/dosis_medium"
-            />
+            android:paddingLeft="10dp"
+            android:textColor="#8F171A1B"
+            android:textSize="20dp"
+            tools:text="My Cup 1" />
 
 
             <ImageView

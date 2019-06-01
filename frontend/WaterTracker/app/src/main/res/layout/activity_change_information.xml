@@ -12,7 +12,7 @@
     android:weightSum="15"
     >
     <TextView
-        android:layout_weight="1.5"
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Profile"
@@ -57,63 +57,7 @@
         </View>
     </LinearLayout>
 
-    <LinearLayout
-        android:paddingHorizontal="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/gender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/edit_name"
-            android:text="성별"
-            android:textSize="20dp"
-            android:textStyle="normal"
-            android:fontFamily="@font/namsan"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:textSize="20dp"
-
-            />
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <RadioGroup
-            android:layout_width="155dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
-            <RadioButton
-                android:id="@+id/check_m"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/orange"
-                android:fontFamily="@font/namsan"
-                android:text="남자"
-                android:textStyle="normal"
-                android:textSize="15dp"/>
-
-            <RadioButton
-                android:id="@+id/check_fm"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/namsan"
-                android:text="여자"
-                android:textStyle="normal"
-                android:textSize="15dp"/>
-        </RadioGroup>
-    </LinearLayout>
 
     <LinearLayout
         android:paddingHorizontal="20dp"
@@ -163,16 +107,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@+id/weight">
+
         <TextView
 
+            android:id="@+id/drop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="평균 한 모금"
-            android:id="@+id/drop"
-            android:textSize="20dp"
-            android:textStyle="normal"
             android:fontFamily="@font/namsan"
-            />
+            android:text="평균 한 모금"
+            android:textSize="20dp"
+            android:textStyle="normal" />
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
