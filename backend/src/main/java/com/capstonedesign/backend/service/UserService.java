@@ -35,9 +35,4 @@ public class UserService {
 
         userRepository.save(account);
     }
-
-    public boolean isAlreadyExistUserId(Account account) {
-
-        return userRepository.existsAccountByUserMid(account.getUserMid());
-    }
 }

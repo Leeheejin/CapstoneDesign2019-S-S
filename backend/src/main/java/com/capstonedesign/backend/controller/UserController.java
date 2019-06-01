@@ -19,14 +19,9 @@ public class UserController {
     @PostMapping(path = "/register")
     public Account register(@RequestBody Account account) {
 
-        if(!userService.isAlreadyExistUserId(account)) {
+        userService.createNewAccount(account);
 
-            userService.createNewAccount(account);
-
-            return userService.getUserInfo(account.getId());
-        }
-
-        return null;
+        return userService.getUserInfo(account.getId());
     }
 
     @PostMapping(path = "/confirm")
