@@ -325,10 +325,8 @@ public class MainActivity extends AppCompatActivity
 
 
     public void getUserInfo() {
-        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
         new Thread() {
             public void run() {
-                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
                 account.setId((long) 1);
                 httpConn.getUserInfo(account, userCallback);
             }
@@ -337,30 +335,24 @@ public class MainActivity extends AppCompatActivity
 
 
     public void confirm() {
-        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
         new Thread() {
             public void run() {
-                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
                 httpConn.confirm(account, userCallback);
             }
         }.start();
     }
 
     public void saveCup() {
-        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
         new Thread() {
             public void run() {
-                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
                 httpConn.saveCup(cup, cupCallback);
             }
         }.start();
     }
 
     public void chanceCup() {
-        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
         new Thread() {
             public void run() {
-                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
                 cup.setUid((long) 1);
                 cup.setCid((long) 3);
                 httpConn.changeCup(cup, cupCallback);
@@ -369,40 +361,32 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void editCup() {
-        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
         new Thread() {
             public void run() {
-                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
                 httpConn.editCup(cup, cupCallback);
             }
         }.start();
     }
 
     public void deleteCup() {
-        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
         new Thread() {
             public void run() {
-                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
                 httpConn.deleteCup(cup);
             }
         }.start();
     }
 
     public void cupInfo() {
-        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
         new Thread() {
             public void run() {
-                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
                 httpConn.cupInfo(cup);
             }
         }.start();
     }
 
     public void drinkWater() {
-        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
         new Thread() {
             public void run() {
-                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
                 httpConn.drinkWater(water, waterCallback);
             }
         }.start();
