@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,8 +30,6 @@ public class Change_cup extends AppCompatActivity {
     private ArrayList<Integer> cupInfoArrayList = new ArrayList<>();
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +37,7 @@ public class Change_cup extends AppCompatActivity {
 
         // make sample data
         for (int i = 0; i < 5; i++) {
-            mList.add(String.format("나의 컵 %s", i + 1));
+            mList.add(String.format("My Cup %s", i + 1));
 
         }
         cupInfoArrayList.add(R.drawable.cup1);
@@ -73,7 +73,13 @@ public class Change_cup extends AppCompatActivity {
         // setup swipe to remove item
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(mBinding.recyclerView1);
+
+
+
     }
+
+
+
 
     /**
      * view holder class
@@ -119,5 +125,8 @@ public class Change_cup extends AppCompatActivity {
         mToast = Toast.makeText(Change_cup.this, "삭제되었습니다.", Toast.LENGTH_SHORT);
         mToast.show();
     }
+
+
+
 }
 

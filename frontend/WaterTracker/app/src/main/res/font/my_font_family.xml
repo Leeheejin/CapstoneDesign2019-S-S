@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+tools:ignore="UnusedAttribute">
+
+<!-- normal -->
+<font
+    android:font="@font/shinb"
+    android:fontStyle="normal"
+    android:fontWeight="400"
+    app:font="@font/shinb"
+    app:fontStyle="normal"
+    app:fontWeight="400" />
+    <font
+        android:font="@font/dosis_medium"
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        app:font="@font/dosis_medium"
+        app:fontStyle="normal"
+        app:fontWeight="400" />
+    <font
+        android:font="@font/pacifico"
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        app:font="@font/pacifico"
+        app:fontStyle="normal"
+        app:fontWeight="400" />
+    <font
+        android:font="@font/culdesac"
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        app:font="@font/culdesac"
+        app:fontStyle="normal"
+        app:fontWeight="400" />
+
+    <font
+        android:font="@font/hongcha"
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        app:font="@font/hongcha"
+        app:fontStyle="normal"
+        app:fontWeight="400" />
+
+
+    <font
+        android:font="@font/lilly"
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        app:font="@font/lilly"
+        app:fontStyle="normal"
+        app:fontWeight="400" />
+    <font
+        android:font="@font/namsan"
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        app:font="@font/namsan"
+        app:fontStyle="normal"
+        app:fontWeight="400" />
+
+
+    <!-- bold -->
+<font
+    android:font="@font/amatic_bold"
+    android:fontStyle="normal"
+    android:fontWeight="700"
+    app:font="@font/amatic_bold"
+    app:fontStyle="normal"
+    app:fontWeight="700" />
+    <font
+        android:font="@font/dosis_bold"
+        android:fontStyle="normal"
+        android:fontWeight="700"
+        app:font="@font/dosis_bold"
+        app:fontStyle="normal"
+        app:fontWeight="700" />
+
+</font-family>

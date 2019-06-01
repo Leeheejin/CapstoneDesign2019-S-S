@@ -2,6 +2,10 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+            <!-- Customize your theme here. -->
+
+
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#6DA4BE</item>
         <item name="colorPrimaryDark">#5DA4BE</item>
@@ -19,6 +23,8 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!-- Custom font style 일괄적용 -->
+
 
 
 

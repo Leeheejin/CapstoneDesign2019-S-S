@@ -7,7 +7,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Change_cup">
+    tools:context=".Change_cup"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,6 +27,8 @@
             android:gravity="top|center_horizontal"
             android:textColorHint="#A1E87F4D"
             android:textSize="40dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/amatic_bold"
             />
 
         <LinearLayout
@@ -52,7 +55,9 @@
             android:background="@drawable/btn_custom"
             android:text="완료"
             android:textColor="#ffffff"
-            android:textSize="20dp" />
+            android:textSize="22dp"
+            android:textStyle="normal"
+            android:fontFamily="@font/namsan"/>
 
     </LinearLayout>
 

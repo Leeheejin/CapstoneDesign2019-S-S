@@ -13,10 +13,12 @@
         android:id="@+id/txt_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="7dp"
+        android:textSize="20dp"
         android:gravity="center"
         android:text="Date / date /date"
         android:textStyle="normal"
+        android:fontFamily="@font/namsan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/digitalClock1" />
@@ -25,14 +27,15 @@
     <DigitalClock
         android:id="@+id/digitalClock1"
         android:layout_width="249dp"
-        android:layout_height="78dp"
-        android:layout_marginBottom="64dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="72dp"
+        android:fontFamily="@font/culdesac"
+        android:gravity="center_vertical|center_horizontal"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-        android:textStyle="normal"
         android:textColor="#859B9E"
+        android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/img_waterdrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.623"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
@@ -77,13 +80,15 @@
         android:id="@+id/txt_allo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="95dp"
-        android:layout_marginLeft="95dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginLeft="108dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:fontFamily="@font/amatic_bold"
         android:text="00%"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
         android:textSize="40dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -93,9 +98,12 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:text="사용중인 컵"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:fontFamily="@font/amatic_bold"
+        android:text="now using cup"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -103,10 +111,13 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="마실 물"
+        android:text="drink"
         app:layout_constraintEnd_toEndOf="@+id/img_waterdrop"
         app:layout_constraintStart_toStartOf="@+id/img_waterdrop"
-        app:layout_constraintTop_toBottomOf="@+id/img_waterdrop" />
+        app:layout_constraintTop_toBottomOf="@+id/img_waterdrop"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/amatic_bold"/>
 
     <TextView
         android:id="@+id/txt_remaintToGoal"
@@ -123,7 +134,9 @@
         app:layout_constraintBottom_toTopOf="@+id/main_switch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        android:textStyle="normal"
+        android:fontFamily="@font/namsan"/>
 
     <Switch
         android:id="@+id/main_switch"
@@ -135,6 +148,8 @@
         android:layout_marginRight="96dp"
         android:layout_marginBottom="25dp"
         android:text="Alarm     "
+        android:textStyle="normal"
+        android:fontFamily="@font/dosis_medium"
         android:thumb="@drawable/switch_thumb"
         android:track="@drawable/switch_track_selector"
         app:layout_constraintBottom_toTopOf="@+id/team"
@@ -151,6 +166,8 @@
         android:text="Project by ㅎㅎㅎ"
         android:textColor="#81425A6F"
         android:textSize="11dp"
+        android:textStyle="normal"
+        android:fontFamily="@font/dosis_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
