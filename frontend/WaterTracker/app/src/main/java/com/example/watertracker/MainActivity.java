@@ -1,20 +1,14 @@
 package com.example.watertracker;
 
 import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -36,7 +30,6 @@ import android.widget.Toast;
 import com.example.watertracker.domain.Account;
 import com.example.watertracker.domain.Cup;
 import com.example.watertracker.domain.Water;
-import com.example.watertracker.http.HttpConnection;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
