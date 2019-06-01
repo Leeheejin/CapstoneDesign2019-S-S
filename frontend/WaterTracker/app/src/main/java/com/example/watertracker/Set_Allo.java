@@ -13,7 +13,7 @@ public class Set_Allo extends AppCompatActivity {
 
     SeekBar seekbar;
     EditText outcome;
-    public int dailyGoal = 0; //TODO: 일일 권장량 , 서버에 입력 (메인액티비티에서 사용)
+    public int dailyGoal = ((MainActivity)MainActivity.mContext).account.getRecommendDrink(); //TODO: 일일 권장량 , 서버에 입력 (메인액티비티에서 사용)
 
 
 

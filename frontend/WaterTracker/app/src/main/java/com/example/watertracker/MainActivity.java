@@ -16,6 +16,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -32,14 +33,33 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.watertracker.domain.Account;
+import com.example.watertracker.domain.Cup;
+import com.example.watertracker.domain.Water;
+import com.example.watertracker.http.HttpConnection;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Switch alarmSwitch;
 
+    private static final String TAG = "MainActivity";
+    private HttpConnection httpConn = HttpConnection.getInstance();
+
+    public Account account = new Account();
+    public Cup cup = new Cup();
+    public Water water = new Water();
+
+    public static Context mContext;
 
 
     @Override
@@ -49,6 +69,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mContext = this;
+        getUserInfo();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -80,11 +102,13 @@ public class MainActivity extends AppCompatActivity
         date.setText(strDate);
 
         float user_weight = 70;
-        float dailyGoal = 0; //TODO:  일일 권장량, 서버에서 LOAD , SET_ALLO 페이지에서 서버로 입력
+        //TODO : 이 부분이 어플 실행 시 어느 시점인지 모름 account.setWeight((int) user_weight);
 
-        dailyGoal = user_weight * 30;
+        float dailyGoal = account.getRecommendDrink(); //TODO:  일일 권장량, 서버에서 LOAD , SET_ALLO 페이지에서 서버로 입력
 
-        int dailySum = 700;  //TODO: 일일 누적 음수량, 서버에서 LOAD
+        //dailyGoal = user_weight * 30;
+
+        int dailySum = account.getNowDrink();  //TODO: 일일 누적 음수량, 서버에서 LOAD
 
         int dailyPercent =  (int)((dailySum/dailyGoal) *100); // 일일 누적 달성량
         int remaintogoal = (int)dailyGoal - dailySum; // 목표달성까지 남은 음수량
@@ -300,5 +324,129 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    public void getUserInfo() {
+        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
+        new Thread() {
+            public void run() {
+                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
+                account.setId((long) 1);
+                httpConn.getUserInfo(account, userCallback);
+            }
+        }.start();
+    }
 
+
+    public void confirm() {
+        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
+        new Thread() {
+            public void run() {
+                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
+                httpConn.confirm(account, userCallback);
+            }
+        }.start();
+    }
+
+    public void saveCup() {
+        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
+        new Thread() {
+            public void run() {
+                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
+                httpConn.saveCup(cup, cupCallback);
+            }
+        }.start();
+    }
+
+    public void chanceCup() {
+        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
+        new Thread() {
+            public void run() {
+                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
+                cup.setUid((long) 1);
+                cup.setCid((long) 3);
+                httpConn.changeCup(cup, cupCallback);
+            }
+        }.start();
+    }
+
+    public void editCup() {
+        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
+        new Thread() {
+            public void run() {
+                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
+                httpConn.editCup(cup, cupCallback);
+            }
+        }.start();
+    }
+
+    public void deleteCup() {
+        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
+        new Thread() {
+            public void run() {
+                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
+                httpConn.deleteCup(cup);
+            }
+        }.start();
+    }
+
+    public void drinkWater() {
+        // 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
+        new Thread() {
+            public void run() {
+                // 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
+                httpConn.drinkWater(water, waterCallback);
+            }
+        }.start();
+    }
+
+
+    public final Callback userCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            Log.d(TAG, "콜백오류:"+e.getMessage());
+            Log.d(TAG, e.toString());
+        }
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+
+            final byte[] responseBytes = response.body().bytes();
+            ObjectMapper objectMapper = new ObjectMapper();
+            account = objectMapper.readValue(responseBytes, Account.class);
+
+            Log.d(TAG, "Account Info: " + account.toString());
+        }
+    };
+
+    public final Callback cupCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            Log.d(TAG, "콜백오류:"+e.getMessage());
+            Log.d(TAG, e.toString());
+        }
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+
+            final byte[] responseBytes = response.body().bytes();
+            ObjectMapper objectMapper = new ObjectMapper();
+            cup = objectMapper.readValue(responseBytes, Cup.class);
+
+            Log.d(TAG, "Cup Info: " + cup.toString());
+        }
+    };
+
+    public final Callback waterCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            Log.d(TAG, "콜백오류:"+e.getMessage());
+            Log.d(TAG, e.toString());
+        }
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+
+            final byte[] responseBytes = response.body().bytes();
+            ObjectMapper objectMapper = new ObjectMapper();
+            water = objectMapper.readValue(responseBytes, Water.class);
+
+            Log.d(TAG, "Water Info: " + water.toString());
+        }
+    };
 }

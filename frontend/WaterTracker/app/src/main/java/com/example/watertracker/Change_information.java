@@ -10,9 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class Change_information extends AppCompatActivity {
-    String userName; //TODO : user name
-    int weight; //TODO : Weight
-    int avg_drop; //TODO : 평균 한 모금 설정
+    //String userName; //TODO : user name
+    int weight = ((MainActivity)MainActivity.mContext).account.getWeight(); //TODO : Weight
+    int avg_drop = ((MainActivity)MainActivity.mContext).account.getOneDrink(); //TODO : 평균 한 모금 설정
     Button btn;
 
     @Override

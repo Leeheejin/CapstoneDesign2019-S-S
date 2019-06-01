@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.watertracker.databinding.ActivityChangeCupBinding;
 import com.example.watertracker.databinding.RecyclerViewRowBinding;
+import com.example.watertracker.domain.Cup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,8 @@ public class Change_cup extends AppCompatActivity {
     private ActivityChangeCupBinding mBinding;
     private Toast mToast;
     private ArrayList<Integer> cupInfoArrayList = new ArrayList<>(); //TODO: cup Image
+
+    public Cup cup = new Cup();
 
 
     @Override
@@ -115,6 +118,8 @@ public class Change_cup extends AppCompatActivity {
             showToast("on remove " + mList.remove(position));
             // 아답타에게 알린다
             mBinding.recyclerView1.getAdapter().notifyItemRemoved(position);
+
+            //TODO: way to use method ((MainActivity)MainActivity.mContext).deleteCup();
         }
     };
 
