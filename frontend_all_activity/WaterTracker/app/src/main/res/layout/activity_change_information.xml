@@ -85,15 +85,11 @@
             android:layout_weight="1" />
 
         <EditText
-            android:layout_width="70dp"
-            android:layout_height="32dp"
-            android:background="@drawable/edge"
-            android:id="@+id/user_weight"/>
-        <TextView
             android:id="@+id/put_weight"
-            android:layout_width="41dp"
+            android:layout_width="120dp"
             android:layout_height="32dp"
             android:layout_gravity="right"
+            android:background="@drawable/edge2"
             android:gravity="right"
             android:inputType="number"
             android:text="Kg   "
@@ -101,7 +97,6 @@
             android:textSize="25dp"
             android:textStyle="bold"
             android:fontFamily="@font/my_font_family" />
-
     </LinearLayout>
 
 
@@ -128,24 +123,19 @@
             android:layout_weight="1" />
 
         <EditText
-            android:layout_width="70dp"
-            android:layout_height="32dp"
-            android:background="@drawable/edge"
-            android:id="@+id/avg_drink"/>
-
-        <TextView
             android:id="@+id/drop_val"
-            android:layout_width="41dp"
+            android:layout_width="120dp"
             android:layout_height="32dp"
             android:layout_below="@+id/weight"
-            android:fontFamily="@font/my_font_family"
-            android:gravity="right"
-            android:inputType="number"
             android:text="mL   "
             android:textColor="#000000"
             android:textSize="25dp"
-            android:textStyle="bold" />
-
+            android:textStyle="bold"
+            android:fontFamily="@font/my_font_family"
+            android:gravity="right"
+            android:background="@drawable/edge2"
+            android:inputType="number"
+            />
     </LinearLayout>
 
 
