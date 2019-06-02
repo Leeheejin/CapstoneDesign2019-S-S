@@ -50,8 +50,11 @@ public class Set_Allo extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 try{
-                    seekbar.setProgress(Integer.parseInt(s.toString()));
+
                     dailyGoal= Integer.parseInt((s.toString()));
+                    seekbar.setProgress(Integer.parseInt(s.toString()));
+
+
 
                 } catch(Exception ex) {}
 

@@ -139,7 +139,7 @@
             android:layout_height="32dp"
             android:gravity="right"
             android:inputType="number"
-            android:text="mL"
+            android:text=""
             android:textSize="25dp"
             android:textColor="#ADFFFFFF"
             android:textColorHint="#4f788d"
