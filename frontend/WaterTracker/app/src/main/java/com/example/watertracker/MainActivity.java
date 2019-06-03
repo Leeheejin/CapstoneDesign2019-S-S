@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity
         progressBar.setProgress(5);
         //progressBar.setSecondaryProgress(dailyPercent);
 
-        setScreen();
+        //setScreen();
 
         //Alarm Switch
 
@@ -295,8 +295,8 @@ public class MainActivity extends AppCompatActivity
         remainToGoal = (TextView) findViewById(R.id.txt_remaintToGoal);
         daily_allo = (TextView) findViewById(R.id.txt_allo);
 
-        dailySum = 0; //account.getNowDrink();
-        dailyGoal = 100; //account.getRecommendDrink();
+        dailySum = account.getNowDrink();
+        dailyGoal = account.getRecommendDrink();
 
         dailyPercent =  (int)((dailySum/dailyGoal) *100); // 일일 누적 달성량
         remaintogoal = (int)dailyGoal - dailySum; // 목표달성까지 남은 음수량
@@ -348,7 +348,7 @@ public class MainActivity extends AppCompatActivity
             public void run() {
                 ((MainActivity)MainActivity.mContext).account.setId((long) 1);
                 httpConn.getUserInfo(((MainActivity)MainActivity.mContext).account, userCallback);
-
+                setScreen();
             }
         }.start();
     }
@@ -358,6 +358,7 @@ public class MainActivity extends AppCompatActivity
         new Thread() {
             public void run() {
                 httpConn.confirm(account, userCallback);
+                setScreen();
             }
         }.start();
     }
