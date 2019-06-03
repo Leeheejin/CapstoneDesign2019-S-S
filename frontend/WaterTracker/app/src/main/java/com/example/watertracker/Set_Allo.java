@@ -17,16 +17,20 @@ import android.widget.Toast;
 
 import com.example.watertracker.domain.Account;
 
+import java.util.ArrayList;
+
 public class Set_Allo extends AppCompatActivity {
 
     SeekBar seekbar;
     EditText outcome;
     TextView calWater;
-    RadioButton defaultAllo;
-    RadioButton customAllo;
+    CheckBox defaultAllo;
+    CheckBox customAllo;
+
+    ArrayList<CheckBox> mCheckBoxes = new ArrayList<CheckBox>();
 
     public int dailyGoal = ((MainActivity)MainActivity.mContext).account.getRecommendDrink(); //TODO: 일일 권장량 , 서버에 입력 (메인액티비티에서 사용)
-    public int weight = ((MainActivity)MainActivity.mContext).account.getWeight();
+    //public int weight = ((MainActivity)MainActivity.mContext).account.getWeight();
     Button btn;
     Account account = ((MainActivity)MainActivity.mContext).account;
 
@@ -41,14 +45,64 @@ public class Set_Allo extends AppCompatActivity {
         seekbar = (SeekBar) findViewById(R.id.water_SeekBar);
         outcome = (EditText) findViewById(R.id.water_input);
         calWater = (TextView) findViewById(R.id.cal_water);
-        defaultAllo = (RadioButton) findViewById(R.id.check_1);
-        customAllo = (RadioButton) findViewById(R.id.check_2);
+        defaultAllo = (CheckBox) findViewById(R.id.check_1);
+        customAllo = (CheckBox) findViewById(R.id.check_2);
 
+        mCheckBoxes.add(defaultAllo);
+        mCheckBoxes.add(customAllo);
 
-
-        calWater.setText(weight*30+"mL");
+        // calWater.setText(weight*30+"mL");   무게정보가 안들어가 있을때 팅김
         outcome.setText(dailyGoal+"");
         seekbar.setProgress(dailyGoal);
+
+        defaultAllo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(((CheckBox)v).isChecked())
+                {
+                    for (int i =0; i < mCheckBoxes.size(); i++)
+                    {
+                        if (mCheckBoxes.get(i) == v)
+                        {
+
+                        }
+                        else
+                        {
+                            mCheckBoxes.get(i).setChecked(false);
+                        }
+                    }
+                }
+
+            }
+        });
+
+        customAllo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(((CheckBox)v).isChecked())
+                {
+                    for (int i =0; i < mCheckBoxes.size(); i++)
+                    {
+                        if (mCheckBoxes.get(i) == v)
+                        {
+
+                        }
+                        else
+                        {
+                            mCheckBoxes.get(i).setChecked(false);
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+
+
+
 
         outcome.addTextChangedListener(new TextWatcher() {
             @Override
