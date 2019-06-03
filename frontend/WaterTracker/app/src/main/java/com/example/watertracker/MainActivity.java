@@ -54,9 +54,12 @@ public class MainActivity extends AppCompatActivity
 
     public static Context mContext;
     public TextView remainToGoal;
+    public TextView daily_allo;
+    public ProgressBar progressBar;
     public int remaintogoal;
     public int dailySum;
     public float dailyGoal;
+    public  int dailyPercent;
 
 
     @Override
@@ -85,11 +88,16 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+
+        //Alarm Default
+
         SharedPreferences prefs2 = getSharedPreferences("PushTerm", MODE_PRIVATE);
         int term = prefs2.getInt("term", 60);
 
         new AlarmHATT(getApplicationContext()).Alarm(term); // Alarm default
 
+
+        // Date and Clock
 
         SimpleDateFormat datef = new SimpleDateFormat("yyyy년 MM월 dd일");
         Calendar c1 = Calendar.getInstance();
@@ -98,33 +106,41 @@ public class MainActivity extends AppCompatActivity
         TextView date = (TextView)findViewById(R.id.txt_date);
         date.setText(strDate);
 
+
+
         float user_weight = 70;
         //TODO : 이 부분이 어플 실행 시 어느 시점인지 모름 account.setWeight((int) user_weight);
 
         dailyGoal = account.getRecommendDrink(); //TODO:  일일 권장량, 서버에서 LOAD , SET_ALLO 페이지에서 서버로 입력
 
-        //dailyGoal = user_weight * 30;
+
+        /* Test
+        dailyGoal = user_weight*30;
+        account.setRecommendDrink((int)dailyGoal);
+        confirm();
+        */
 
         dailySum = account.getNowDrink();  //TODO: 일일 누적 음수량, 서버에서 LOAD
-
-        int dailyPercent =  (int)((dailySum/dailyGoal) *100); // 일일 누적 달성량
-        int remaintogoal = (int)dailyGoal - dailySum; // 목표달성까지 남은 음수량
-
-
+        //dailyPercent =  (int)((dailySum/dailyGoal) *100); // 일일 누적 달성량
+        //remaintogoal = (int)dailyGoal - dailySum; // 목표달성까지 남은 음수량
 
         remainToGoal = (TextView)findViewById(R.id.txt_remaintToGoal);
-        remainToGoal.setText("목표 달성까지 " + remaintogoal + "mL"  );
+        //remainToGoal.setText("목표 달성까지 " + remaintogoal + "mL"  );
 
-
-        TextView daily_allo = (TextView)findViewById(R.id.txt_allo);
-        daily_allo.setText(dailyPercent+"%");
+        daily_allo = (TextView)findViewById(R.id.txt_allo);
+        //daily_allo.setText(dailyPercent+"%");
 
         //ImageView waterdrop = (ImageView)findViewById(R.id.img_waterdrop);
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.water_prog);
+        progressBar = (ProgressBar) findViewById(R.id.water_prog);
         progressBar.setMax(100);
-        progressBar.setProgress(30);
-        progressBar.setSecondaryProgress(dailyPercent);
+        progressBar.setProgress(5);
+        //progressBar.setSecondaryProgress(dailyPercent);
 
+
+        setScreen();
+
+
+        //Alarm Switch
 
         SharedPreferences prefs = getSharedPreferences("PrefName", MODE_PRIVATE);
         alarmSwitch = (Switch) findViewById(R.id.main_switch);
@@ -140,13 +156,18 @@ public class MainActivity extends AppCompatActivity
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked == true){
 
+                    /*Test
+                    dailySum = dailySum +100;
+                    account.setNowDrink(dailySum);
+                    confirm();
+                    setScreen();
+                    */
+
                     SharedPreferences.Editor ed = prefs.edit();
                     ed.putBoolean("Alarm", true);
                     ed.commit();
                     Toast.makeText(MainActivity.this, "알람이 설정되었습니다.", Toast.LENGTH_SHORT).show();
                     alarmSwitch.setChecked(true);
-
-
 
                 } else {
                     SharedPreferences.Editor ed = prefs.edit();
@@ -157,17 +178,10 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
-
-
-
-
-
     }
-
 
     public class AlarmHATT {
         private Context context;
-
         public AlarmHATT(Context context) {
             this.context=context;
         }
@@ -221,6 +235,8 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
+    //Alarm term Setting
     public void term_set() {
         final String[] items = new String[]{"10분", "20분", "30분", "40분", "50분", "60분"};
         final int[] selectedindex = {0};
@@ -287,6 +303,24 @@ public class MainActivity extends AppCompatActivity
 
 
                 }).create().show();
+    }
+
+    //Screen TextView and ImageView
+    public void setScreen() {
+
+        dailySum = account.getNowDrink();
+        dailyGoal = account.getRecommendDrink();
+        dailyPercent =  (int)((dailySum/dailyGoal) *100); // 일일 누적 달성량
+        remaintogoal = (int)dailyGoal - dailySum; // 목표달성까지 남은 음수량
+
+        remainToGoal.setText("목표 달성까지 " + remaintogoal + "mL"  );
+        daily_allo.setText(dailyPercent+"%");
+        progressBar.setSecondaryProgress(dailyPercent);
+
+        if(remaintogoal<=0)
+        {
+            remainToGoal.setText("목표 달성 완료!");
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

@@ -15,7 +15,7 @@ public class Change_information extends AppCompatActivity {
     //String userName; //TODO : user name
 //    public int weight = ((MainActivity)MainActivity.mContext).account.getWeight();
     public int weight;
-    public int avg_drop;
+    public int avg_drop; //TODO : 평균 한 모금 설정
     private static final String TAG = "InfoActivity";
     // 싱글톤 패턴을 사용하여 이 어플리케이션에서 전역으로 사용하는 하나의 변수를 접근하기 위한 방법
     // ((MainActivity)MainActivity.mContext) 에 . 을 찍어서 해당 변수, 혹은 함수에 접근할 수 있음
@@ -54,7 +54,6 @@ public class Change_information extends AppCompatActivity {
     // 과 같이 전송해야 정상 처리 됨. 만약 uid,cid를 포함하지 않고 전송 시에는 오류를 반환함.
 
 
-    //int avg_drop = 0; //TODO : 평균 한 모금 설정
     Button btn;
     EditText putweight;
     TextView avgdrop;
@@ -87,13 +86,9 @@ public class Change_information extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 try{
 
-
                     //weight = Integer.parseInt(putweight.getText().toString());
                     weight=Integer.parseInt((s.toString()));
-
                     Log.d(TAG, String.valueOf(weight));
-
-
 
                 } catch(Exception ex) {}
 
@@ -107,14 +102,13 @@ public class Change_information extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-
                 ((MainActivity)MainActivity.mContext).account.setWeight(weight);
+                //((MainActivity)MainActivity.mContext).account.setRecommendDrink(weight*30);
                 ((MainActivity)MainActivity.mContext).confirm();
 
-                ((MainActivity)MainActivity.mContext).remaintogoal = (int)((MainActivity)MainActivity.mContext).dailyGoal - ((MainActivity)MainActivity.mContext).dailySum;
-                ((MainActivity)MainActivity.mContext).remainToGoal.setText("목표 달성까지 " + ((MainActivity)MainActivity.mContext).remaintogoal + "mL"  );
-
+                //((MainActivity)MainActivity.mContext).remaintogoal = (int)((MainActivity)MainActivity.mContext).dailyGoal - ((MainActivity)MainActivity.mContext).dailySum;
+                //((MainActivity)MainActivity.mContext).remainToGoal.setText("목표 달성까지 " + ((MainActivity)MainActivity.mContext).remaintogoal + "mL"  );
+                ((MainActivity)MainActivity.mContext).setScreen();
 
                 Toast.makeText(getApplicationContext(),"수정완료",Toast.LENGTH_LONG).show();
             }
