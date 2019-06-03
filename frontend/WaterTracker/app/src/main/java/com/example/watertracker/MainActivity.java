@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity
     public  int dailyPercent;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,16 +107,6 @@ public class MainActivity extends AppCompatActivity
         TextView date = (TextView)findViewById(R.id.txt_date);
         date.setText(strDate);
 
-        float user_weight = ((MainActivity)MainActivity.mContext).account.getWeight();
-        //TODO : 이 부분이 어플 실행 시 어느 시점인지 모름 account.setWeight((int) user_weight);
-
-        dailyGoal = ((MainActivity)MainActivity.mContext).account.getRecommendDrink(); //TODO:  일일 권장량, 서버에서 LOAD , SET_ALLO 페이지에서 서버로 입력
-
-        dailySum = ((MainActivity)MainActivity.mContext).account.getNowDrink();  //TODO: 일일 누적 음수량, 서버에서 LOAD
-
-        dailyPercent =  (int)((dailySum/dailyGoal) *100); // 일일 누적 달성량
-        remaintogoal = (int)dailyGoal - dailySum; // 목표달성까지 남은 음수량
-
         Log.d("init account : ", account.toString());
         //TODO :: 값 불러오는 속도보다 어플리케이션에서 화면에 찍는 속도가 훨씬 빨라서 항상 초기값만 찍힘
 
@@ -125,20 +116,13 @@ public class MainActivity extends AppCompatActivity
         confirm();
         */
 
-        //remainToGoal.setText("목표 달성까지 " + remaintogoal + "mL"  );
-
-        daily_allo = (TextView)findViewById(R.id.txt_allo);
-        //daily_allo.setText(dailyPercent+"%");
-
         //ImageView waterdrop = (ImageView)findViewById(R.id.img_waterdrop);
         progressBar = (ProgressBar) findViewById(R.id.water_prog);
         progressBar.setMax(100);
         progressBar.setProgress(5);
         //progressBar.setSecondaryProgress(dailyPercent);
 
-
         setScreen();
-
 
         //Alarm Switch
 
@@ -308,12 +292,16 @@ public class MainActivity extends AppCompatActivity
     //Screen TextView and ImageView
     public void setScreen() {
 
-        dailySum = account.getNowDrink();
-        dailyGoal = account.getRecommendDrink();
+        remainToGoal = (TextView) findViewById(R.id.txt_remaintToGoal);
+        daily_allo = (TextView) findViewById(R.id.txt_allo);
+
+        dailySum = 0; //account.getNowDrink();
+        dailyGoal = 100; //account.getRecommendDrink();
+
         dailyPercent =  (int)((dailySum/dailyGoal) *100); // 일일 누적 달성량
         remaintogoal = (int)dailyGoal - dailySum; // 목표달성까지 남은 음수량
 
-        remainToGoal.setText("목표 달성까지 " + remaintogoal + "mL"  );
+        remainToGoal.setText("목표 달성까지 " + remaintogoal + "mL");
         daily_allo.setText(dailyPercent+"%");
         progressBar.setSecondaryProgress(dailyPercent);
 
@@ -360,6 +348,7 @@ public class MainActivity extends AppCompatActivity
             public void run() {
                 ((MainActivity)MainActivity.mContext).account.setId((long) 1);
                 httpConn.getUserInfo(((MainActivity)MainActivity.mContext).account, userCallback);
+
             }
         }.start();
     }
