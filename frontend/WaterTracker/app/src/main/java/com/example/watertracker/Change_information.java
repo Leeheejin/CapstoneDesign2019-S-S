@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 public class Change_information extends AppCompatActivity {
     //String userName; //TODO : user name
     public int weight;
+    private static final String TAG = "InfoActivity";
 
     // 싱글톤 패턴을 사용하여 이 어플리케이션에서 전역으로 사용하는 하나의 변수를 접근하기 위한 방법
     // ((MainActivity)MainActivity.mContext) 에 . 을 찍어서 해당 변수, 혹은 함수에 접근할 수 있음
@@ -98,6 +100,7 @@ public class Change_information extends AppCompatActivity {
                 ((MainActivity)MainActivity.mContext).remaintogoal = (int)((MainActivity)MainActivity.mContext).dailyGoal - ((MainActivity)MainActivity.mContext).dailySum;
                 ((MainActivity)MainActivity.mContext).remainToGoal.setText("목표 달성까지 " + ((MainActivity)MainActivity.mContext).remaintogoal + "mL"  );
 
+                Log.d(TAG, ((MainActivity)MainActivity.mContext).account.toString());
 
                 Toast.makeText(getApplicationContext(),"수정완료",Toast.LENGTH_LONG).show();
             }

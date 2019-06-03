@@ -21,7 +21,6 @@ public class Set_Allo extends AppCompatActivity {
     EditText outcome;
     public int dailyGoal = ((MainActivity)MainActivity.mContext).account.getRecommendDrink(); //TODO: 일일 권장량 , 서버에 입력 (메인액티비티에서 사용)
     Button btn;
-    Account account = ((MainActivity)MainActivity.mContext).account;
 
     private static final String TAG = "SetActivity";
 
@@ -97,7 +96,7 @@ public class Set_Allo extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"수정완료",Toast.LENGTH_LONG).show();
 
-                Log.d(TAG, "Setting Page's Account Info: " + account.toString());
+                Log.d(TAG, "Setting Page's Account Info: " + ((MainActivity)MainActivity.mContext).account.toString());
             }
         });
     }

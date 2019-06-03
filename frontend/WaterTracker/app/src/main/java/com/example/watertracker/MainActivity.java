@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity
     public int remaintogoal;
     public int dailySum;
     public float dailyGoal;
+    int dailyPercent;
 
 
     @Override
@@ -98,19 +99,20 @@ public class MainActivity extends AppCompatActivity
         TextView date = (TextView)findViewById(R.id.txt_date);
         date.setText(strDate);
 
-        float user_weight = 70;
+        float user_weight = ((MainActivity)MainActivity.mContext).account.getWeight();
         //TODO : 이 부분이 어플 실행 시 어느 시점인지 모름 account.setWeight((int) user_weight);
 
-        dailyGoal = account.getRecommendDrink(); //TODO:  일일 권장량, 서버에서 LOAD , SET_ALLO 페이지에서 서버로 입력
+        dailyGoal = ((MainActivity)MainActivity.mContext).account.getRecommendDrink(); //TODO:  일일 권장량, 서버에서 LOAD , SET_ALLO 페이지에서 서버로 입력
 
         //dailyGoal = user_weight * 30;
 
-        dailySum = account.getNowDrink();  //TODO: 일일 누적 음수량, 서버에서 LOAD
+        dailySum = ((MainActivity)MainActivity.mContext).account.getNowDrink();  //TODO: 일일 누적 음수량, 서버에서 LOAD
 
-        int dailyPercent =  (int)((dailySum/dailyGoal) *100); // 일일 누적 달성량
-        int remaintogoal = (int)dailyGoal - dailySum; // 목표달성까지 남은 음수량
+        dailyPercent =  (int)((dailySum/dailyGoal) *100); // 일일 누적 달성량
+        remaintogoal = (int)dailyGoal - dailySum; // 목표달성까지 남은 음수량
 
-
+        Log.d("init account : ", account.toString());
+        //TODO :: 값 불러오는 속도보다 어플리케이션에서 화면에 찍는 속도가 훨씬 빨라서 항상 초기값만 찍힘
 
         remainToGoal = (TextView)findViewById(R.id.txt_remaintToGoal);
         remainToGoal.setText("목표 달성까지 " + remaintogoal + "mL"  );
@@ -157,10 +159,6 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
-
-
-
-
 
     }
 
@@ -324,8 +322,8 @@ public class MainActivity extends AppCompatActivity
     public void getUserInfo() {
         new Thread() {
             public void run() {
-                account.setId((long) 1);
-                httpConn.getUserInfo(account, userCallback);
+                ((MainActivity)MainActivity.mContext).account.setId((long) 1);
+                httpConn.getUserInfo(((MainActivity)MainActivity.mContext).account, userCallback);
             }
         }.start();
     }
@@ -401,9 +399,9 @@ public class MainActivity extends AppCompatActivity
 
             final byte[] responseBytes = response.body().bytes();
             ObjectMapper objectMapper = new ObjectMapper();
-            account = objectMapper.readValue(responseBytes, Account.class);
+            ((MainActivity)MainActivity.mContext).account = objectMapper.readValue(responseBytes, Account.class);
 
-            Log.d(TAG, "Account Info: " + account.toString());
+            Log.d(TAG, "Account Info: " + ((MainActivity)MainActivity.mContext).account.toString());
         }
     };
 
