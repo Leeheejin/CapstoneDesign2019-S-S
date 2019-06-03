@@ -67,9 +67,9 @@ public class Change_information extends AppCompatActivity {
         avg_drop = ((MainActivity)MainActivity.mContext).account.getOneDrink();
 
         // TODO :: ml_text 가 존재하지 않아서 주석 처리
-        // avgdrop = (TextView)findViewById(R.id.ml_text);
+        avgdrop = (TextView)findViewById(R.id.ml_text);
 
-        avgdrop.setText(avg_drop+"  mL");
+        avgdrop.setText(avg_drop);
 
         putweight = (EditText)findViewById(R.id.put_weight);
 
