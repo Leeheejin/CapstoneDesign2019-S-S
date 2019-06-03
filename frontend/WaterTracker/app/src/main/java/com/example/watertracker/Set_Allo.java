@@ -167,15 +167,8 @@ public class Set_Allo extends AppCompatActivity {
                 ed.putBoolean("Allo", isDefault);
                 ed.commit();
 
-                if(isDefault==false) {
-                    ((MainActivity) MainActivity.mContext).account.setRecommendDrink(dailyGoal);
-                    ((MainActivity) MainActivity.mContext).confirm();
-                }
-                //((MainActivity)MainActivity.mContext).remaintogoal = dailyGoal - ((MainActivity)MainActivity.mContext).dailySum;
-                //((MainActivity)MainActivity.mContext).remainToGoal.setText("목표 달성까지 " + ((MainActivity)MainActivity.mContext).remaintogoal + "mL"  );
-                ((MainActivity)MainActivity.mContext).setScreen();
-
-
+                ((MainActivity) MainActivity.mContext).account.setRecommendDrink(dailyGoal);
+                ((MainActivity) MainActivity.mContext).confirm();
 
                 Toast.makeText(getApplicationContext(),"수정완료",Toast.LENGTH_LONG).show();
 
@@ -188,7 +181,5 @@ public class Set_Allo extends AppCompatActivity {
         outcome.setText(new StringBuilder().append(dailyGoal));
 
     }
-
-
 }
 

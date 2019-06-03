@@ -105,26 +105,13 @@ public class Change_information extends AppCompatActivity {
             public void onClick(View v) {
 
                 ((MainActivity)MainActivity.mContext).account.setWeight(weight);
-                //((MainActivity)MainActivity.mContext).account.setRecommendDrink(weight*30);
                 ((MainActivity)MainActivity.mContext).confirm();
 
-                ((MainActivity)MainActivity.mContext).remaintogoal = (int)((MainActivity)MainActivity.mContext).dailyGoal - ((MainActivity)MainActivity.mContext).dailySum;
-                ((MainActivity)MainActivity.mContext).remainToGoal.setText("목표 달성까지 " + ((MainActivity)MainActivity.mContext).remaintogoal + "mL"  );
-
                 Log.d(TAG, ((MainActivity)MainActivity.mContext).account.toString());
-
-                //((MainActivity)MainActivity.mContext).remaintogoal = (int)((MainActivity)MainActivity.mContext).dailyGoal - ((MainActivity)MainActivity.mContext).dailySum;
-                //((MainActivity)MainActivity.mContext).remainToGoal.setText("목표 달성까지 " + ((MainActivity)MainActivity.mContext).remaintogoal + "mL"  );
-                ((MainActivity)MainActivity.mContext).setScreen();
 
                 Toast.makeText(getApplicationContext(),"수정완료",Toast.LENGTH_LONG).show();
             }
         });
-
-
-
-
-
 
     }
 }

@@ -1,5 +1,6 @@
 package com.example.watertracker;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -7,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -107,22 +110,8 @@ public class MainActivity extends AppCompatActivity
         TextView date = (TextView)findViewById(R.id.txt_date);
         date.setText(strDate);
 
-        Log.d("init account : ", account.toString());
-        //TODO :: 값 불러오는 속도보다 어플리케이션에서 화면에 찍는 속도가 훨씬 빨라서 항상 초기값만 찍힘
-
-        /* Test
-        dailyGoal = user_weight*30;
-        account.setRecommendDrink((int)dailyGoal);
-        confirm();
-        */
-
         //ImageView waterdrop = (ImageView)findViewById(R.id.img_waterdrop);
-        progressBar = (ProgressBar) findViewById(R.id.water_prog);
-        progressBar.setMax(100);
-        progressBar.setProgress(5);
-        //progressBar.setSecondaryProgress(dailyPercent);
 
-        //setScreen();
 
         //Alarm Switch
 
@@ -295,14 +284,23 @@ public class MainActivity extends AppCompatActivity
         remainToGoal = (TextView) findViewById(R.id.txt_remaintToGoal);
         daily_allo = (TextView) findViewById(R.id.txt_allo);
 
-        dailySum = account.getNowDrink();
-        dailyGoal = account.getRecommendDrink();
+        dailySum = ((MainActivity)MainActivity.mContext).account.getNowDrink();
+        dailyGoal = ((MainActivity)MainActivity.mContext).account.getRecommendDrink();
+
+        Log.d(TAG, "NowDrink : "+((MainActivity)MainActivity.mContext).account.getNowDrink());
+        Log.d(TAG, "RecommendDrink : "+((MainActivity)MainActivity.mContext).account.getRecommendDrink());
 
         dailyPercent =  (int)((dailySum/dailyGoal) *100); // 일일 누적 달성량
-        remaintogoal = (int)dailyGoal - dailySum; // 목표달성까지 남은 음수량
+        remaintogoal = (int)(dailyGoal - dailySum); // 목표달성까지 남은 음수량
+
+        Log.d(TAG, "remaintogoal : "+remaintogoal);
 
         remainToGoal.setText("목표 달성까지 " + remaintogoal + "mL");
         daily_allo.setText(dailyPercent+"%");
+
+        progressBar = (ProgressBar) findViewById(R.id.water_prog);
+        progressBar.setMax(100);
+        progressBar.setProgress(5);
         progressBar.setSecondaryProgress(dailyPercent);
 
         if(remaintogoal<=0)
@@ -348,7 +346,6 @@ public class MainActivity extends AppCompatActivity
             public void run() {
                 ((MainActivity)MainActivity.mContext).account.setId((long) 1);
                 httpConn.getUserInfo(((MainActivity)MainActivity.mContext).account, userCallback);
-                setScreen();
             }
         }.start();
     }
@@ -358,7 +355,6 @@ public class MainActivity extends AppCompatActivity
         new Thread() {
             public void run() {
                 httpConn.confirm(account, userCallback);
-                setScreen();
             }
         }.start();
     }
@@ -427,6 +423,9 @@ public class MainActivity extends AppCompatActivity
             ObjectMapper objectMapper = new ObjectMapper();
             ((MainActivity)MainActivity.mContext).account = objectMapper.readValue(responseBytes, Account.class);
 
+            Message message = handler.obtainMessage();
+            handler.sendMessage(message);
+
             Log.d(TAG, "Account Info: " + ((MainActivity)MainActivity.mContext).account.toString());
         }
     };
@@ -462,6 +461,15 @@ public class MainActivity extends AppCompatActivity
             water = objectMapper.readValue(responseBytes, Water.class);
 
             Log.d(TAG, "Water Info: " + water.toString());
+        }
+    };
+
+    @SuppressLint("HandlerLeak")
+    final Handler handler = new Handler()
+    {
+        public void handleMessage(Message msg)
+        {
+            setScreen();
         }
     };
 }
