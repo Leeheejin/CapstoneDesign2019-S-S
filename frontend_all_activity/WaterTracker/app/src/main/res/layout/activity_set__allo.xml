@@ -52,7 +52,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/check_1"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                 android:fontFamily="@font/hongcha"
                 />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/check_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
             android:layout_height="32dp"
             android:gravity="right"
             android:inputType="number"
-            android:text="mL"
+            android:text=""
             android:textSize="25dp"
             android:textColor="#ADFFFFFF"
             android:textColorHint="#4f788d"
