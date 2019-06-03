@@ -1,4 +1,4 @@
-package com.example.watertracker;
+package com.example.watertracker.httpConnect;
 
 import com.example.watertracker.domain.Account;
 import com.example.watertracker.domain.Cup;
@@ -13,7 +13,7 @@ import okhttp3.RequestBody;
 
 public class HttpConnection {
 
-    private final String url = "http://121.168.23.76:8080";
+    private final String url = "http://192.168.43.157:8080";
     private OkHttpClient client;
     private static HttpConnection instance = new HttpConnection();
     public static HttpConnection getInstance() {

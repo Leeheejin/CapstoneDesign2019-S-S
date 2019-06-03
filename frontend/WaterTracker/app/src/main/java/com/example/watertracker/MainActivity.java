@@ -33,6 +33,7 @@ import android.widget.Toast;
 import com.example.watertracker.domain.Account;
 import com.example.watertracker.domain.Cup;
 import com.example.watertracker.domain.Water;
+import com.example.watertracker.httpConnect.HttpConnection;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
