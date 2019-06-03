@@ -13,6 +13,7 @@ import okhttp3.RequestBody;
 
 public class HttpConnection {
 
+    private final String url = "http://121.168.23.76:8080";
     private OkHttpClient client;
     private static HttpConnection instance = new HttpConnection();
     public static HttpConnection getInstance() {
@@ -29,7 +30,7 @@ public class HttpConnection {
         String json = gson.toJson(account);
 
         Request request = new Request.Builder()
-                .url("http://192.168.43.157:8080/userinfo")
+                .url(url+"/userinfo")
                 .post(RequestBody.create(MediaType.parse("application/json"), json))
                 .build();
 
@@ -42,7 +43,7 @@ public class HttpConnection {
         String json = gson.toJson(account);
 
         Request request = new Request.Builder()
-                .url("http://192.168.43.157:8080/confirm")
+                .url(url+"/confirm")
                 .post(RequestBody.create(MediaType.parse("application/json"), json))
                 .build();
 
@@ -55,7 +56,7 @@ public class HttpConnection {
         String json = gson.toJson(cup);
 
         Request request = new Request.Builder()
-                .url("http://192.168.43.157:8080/savecup")
+                .url(url+"/savecup")
                 .post(RequestBody.create(MediaType.parse("application/json"), json))
                 .build();
 
@@ -68,7 +69,7 @@ public class HttpConnection {
         String json = gson.toJson(cup);
 
         Request request = new Request.Builder()
-                .url("http://192.168.43.157:8080/changecup")
+                .url(url+"/changecup")
                 .post(RequestBody.create(MediaType.parse("application/json"), json))
                 .build();
 
@@ -81,7 +82,7 @@ public class HttpConnection {
         String json = gson.toJson(cup);
 
         Request request = new Request.Builder()
-                .url("http://192.168.43.157:8080/editcup")
+                .url(url+"/editcup")
                 .post(RequestBody.create(MediaType.parse("application/json"), json))
                 .build();
 
@@ -94,7 +95,7 @@ public class HttpConnection {
         String json = gson.toJson(cup);
 
         Request request = new Request.Builder()
-                .url("http://192.168.43.157:8080/deletecup")
+                .url(url+"/deletecup")
                 .post(RequestBody.create(MediaType.parse("application/json"), json))
                 .build();
 
@@ -107,7 +108,7 @@ public class HttpConnection {
         String json = gson.toJson(cup);
 
         Request request = new Request.Builder()
-                .url("http://192.168.43.157:8080/cupInfo")
+                .url(url+"/cupInfo")
                 .post(RequestBody.create(MediaType.parse("application/json"), json))
                 .build();
 
@@ -120,7 +121,7 @@ public class HttpConnection {
         String json = gson.toJson(water);
 
         Request request = new Request.Builder()
-                .url("http://192.168.43.157:8080/drink")
+                .url(url+"/drink")
                 .post(RequestBody.create(MediaType.parse("application/json"), json))
                 .build();
 
