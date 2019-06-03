@@ -26,6 +26,7 @@ public class Set_Allo extends AppCompatActivity {
     TextView calWater;
     CheckBox defaultAllo;
     CheckBox customAllo;
+    boolean isDefault;
 
     ArrayList<CheckBox> mCheckBoxes = new ArrayList<CheckBox>();
 
@@ -51,13 +52,22 @@ public class Set_Allo extends AppCompatActivity {
         mCheckBoxes.add(defaultAllo);
         mCheckBoxes.add(customAllo);
 
-        // calWater.setText(weight*30+"mL");   무게정보가 안들어가 있을때 팅김
+        //calWater.setText(weight*30+"mL");
         outcome.setText(dailyGoal+"");
         seekbar.setProgress(dailyGoal);
+
+        SharedPreferences prefs = getSharedPreferences("SetAllo", MODE_PRIVATE);
+        defaultAllo.setChecked(prefs.getBoolean("Allo",true));
+        customAllo.setChecked(!(prefs.getBoolean("Allo",true)));
+
+        isDefault = prefs.getBoolean("Allo",true);
+
 
         defaultAllo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                isDefault=true;
 
                 if(((CheckBox)v).isChecked())
                 {
@@ -80,6 +90,8 @@ public class Set_Allo extends AppCompatActivity {
         customAllo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                isDefault=false;
 
                 if(((CheckBox)v).isChecked())
                 {
@@ -151,12 +163,20 @@ public class Set_Allo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                ((MainActivity)MainActivity.mContext).account.setRecommendDrink(dailyGoal);
-                ((MainActivity)MainActivity.mContext).confirm();
+                SharedPreferences prefs = getSharedPreferences("SetAllo", MODE_PRIVATE);
+                SharedPreferences.Editor ed = prefs.edit();
+                ed.putBoolean("Allo", isDefault);
+                ed.commit();
 
+                if(isDefault==false) {
+                    ((MainActivity) MainActivity.mContext).account.setRecommendDrink(dailyGoal);
+                    ((MainActivity) MainActivity.mContext).confirm();
+                }
                 //((MainActivity)MainActivity.mContext).remaintogoal = dailyGoal - ((MainActivity)MainActivity.mContext).dailySum;
                 //((MainActivity)MainActivity.mContext).remainToGoal.setText("목표 달성까지 " + ((MainActivity)MainActivity.mContext).remaintogoal + "mL"  );
                 ((MainActivity)MainActivity.mContext).setScreen();
+
+
 
                 Toast.makeText(getApplicationContext(),"수정완료",Toast.LENGTH_LONG).show();
 
