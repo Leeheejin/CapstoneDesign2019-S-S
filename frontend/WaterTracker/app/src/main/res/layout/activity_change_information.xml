@@ -91,11 +91,11 @@
             android:layout_height="40dp"
             android:layout_gravity="right"
             android:background="@drawable/edge"
-            android:fontFamily="@font/hongcha"
+            android:fontFamily="@font/my_font_family"
             android:gravity="right"
+            android:text="50"
             android:inputType="number"
-            android:textColor="#000000"
-            android:textSize="25dp"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
         <TextView
