@@ -72,6 +72,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:progressDrawable="@drawable/verticalprogress"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

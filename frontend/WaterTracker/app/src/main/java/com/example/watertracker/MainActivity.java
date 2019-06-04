@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity
     public ProgressBar progressBar;
     public View cupImage;
     public ImageView cupImagee;
+    public View waterdrop;
     public int remaintogoal;
     public int dailySum;
     public float dailyGoal;
@@ -98,14 +99,29 @@ public class MainActivity extends AppCompatActivity
 
         cupImage = findViewById(R.id.imageView2);
         cupImagee= findViewById(R.id.imageView2);
+        waterdrop= findViewById(R.id.water_prog);
+
+        waterdrop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dailySum = ((MainActivity)MainActivity.mContext).account.getNowDrink();
+                //int avgdrop = ((MainActivity)MainActivity.mContext).account.getOneDrink();
+
+                int avgdrop = 27; //test
+                dailySum = dailySum + avgdrop;
+
+                ((MainActivity)MainActivity.mContext).account.setNowDrink(dailySum);
+                ((MainActivity)MainActivity.mContext).confirm();
+                Toast.makeText(MainActivity.this, "물을 한모금 마셨어요.", Toast.LENGTH_SHORT).show();
+                setScreen(); // test
+            }
+        });
 
 
         cupImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 cup_set();
-
             }
         });
 
