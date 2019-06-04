@@ -62,7 +62,7 @@ public class History extends AppCompatActivity {
             if(numberOfDay>100) {
 
                 over100 = numberOfDay - 100;
-                for (int i = 0; i < numberOfDay; i++) {
+                for (int i = 0; i < 100; i++) {
                     xVals.add(datevalues.get(over100+i).toString());
                 }
             }
@@ -81,7 +81,7 @@ public class History extends AppCompatActivity {
                 over100 = numberOfvalue-100;
             }
 
-            for(int i=0; i<numberOfvalue; i++ )
+            for(int i=0; i<numberOfvalue-over100; i++ )
             {
                 vals.add(new BarEntry(values.get(over100+i),i));
             }
@@ -101,6 +101,9 @@ public class History extends AppCompatActivity {
 
         //TestData
         ArrayList<Float> dummyVals = new ArrayList<Float>();
+
+        //TODO: 여기에 서버에 저장된 달성률 목록을 루프돌려서 추가한다. (날짜 오름차순으로 데이터가 먼저 추가되어야 함)
+
         dummyVals.add(109.5f);
         dummyVals.add(96.2f);
         dummyVals.add(106.7f);
@@ -114,6 +117,9 @@ public class History extends AppCompatActivity {
 
 
         ArrayList<String> dummyxVals = new ArrayList<String>();
+
+        //TODO: 여기에 서버에 저장된 날짜 목록을 루프돌려서 추가한다. (날짜 오름차순으로 먼저 추가되어야 함)
+
         dummyxVals.add("5/8");
         dummyxVals.add("5/9");
         dummyxVals.add("5/10");
