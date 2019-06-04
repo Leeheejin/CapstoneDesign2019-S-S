@@ -25,6 +25,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity
     public TextView remainToGoal;
     public TextView daily_allo;
     public ProgressBar progressBar;
+    public View cupImage;
+    public ImageView cupImagee;
     public int remaintogoal;
     public int dailySum;
     public float dailyGoal;
@@ -92,6 +95,19 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        cupImage = findViewById(R.id.imageView2);
+        cupImagee= findViewById(R.id.imageView2);
+
+
+        cupImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                cup_set();
+
+            }
+        });
 
 
         //Alarm Default
@@ -279,6 +295,53 @@ public class MainActivity extends AppCompatActivity
                 }).create().show();
     }
 
+    public void cup_set() {
+        final String[] items = new String[]{"나의컵1", "나의컵2", "나의컵3", "나의컵4", "나의컵5"};
+        final int[] selectedindex = {0};
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        dialog.setTitle("컵 이미지 설정")
+                .setSingleChoiceItems(items
+                        , 0
+                        , new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                selectedindex[0] = which;
+                            }
+                        })
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        switch (items[selectedindex[0]]) {
+                            case "나의컵1":
+                                cupImagee.setImageResource(R.drawable.cup1);
+
+                                break;
+                            case "나의컵2":
+                                cupImagee.setImageResource(R.drawable.cup2);
+
+                                break;
+                            case "나의컵3":
+
+                                break;
+                            case "나의컵4":
+
+                                break;
+                            case "나의컵5":
+
+                                break;
+
+                        }
+
+                    }
+
+
+                }).create().show();
+    }
+
     //Screen TextView and ImageView
     public void setScreen() {
 
@@ -296,7 +359,7 @@ public class MainActivity extends AppCompatActivity
 
         Log.d(TAG, "remaintogoal : "+remaintogoal);
 
-        remainToGoal.setText("목표 달성까지 " + remaintogoal + "mL");
+
         daily_allo.setText(dailyPercent+"%");
 
         progressBar = (ProgressBar) findViewById(R.id.water_prog);
@@ -307,6 +370,10 @@ public class MainActivity extends AppCompatActivity
         if(remaintogoal<=0)
         {
             remainToGoal.setText("목표 달성 완료!");
+        }
+        else
+        {
+            remainToGoal.setText("목표 달성까지 " + remaintogoal + "mL");
         }
     }
 

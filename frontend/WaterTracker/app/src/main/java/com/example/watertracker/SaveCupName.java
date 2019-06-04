@@ -12,5 +12,7 @@ public class SaveCupName extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save_cup_name);
+
+
     }
 }

@@ -1,5 +1,6 @@
 package com.example.watertracker;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.media.Image;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -31,11 +33,14 @@ public class Change_cup extends AppCompatActivity {
 
     public Cup cup = new Cup();
 
+    Button addCup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_change_cup);
+
+        addCup = (Button)findViewById(R.id.cup_change);
 
         for (int i = 0; i < ((MainActivity)MainActivity.mContext).account.getCupList().size(); i++) {
             mList.add(String.format("My Cup %s", i + 1));
@@ -88,6 +93,18 @@ public class Change_cup extends AppCompatActivity {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(mBinding.recyclerView1);
 
+
+
+
+        addCup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Change_cup.this, SaveCupName.class);
+                startActivity(intent);
+
+            }
+        });
 
 
     }
