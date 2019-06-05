@@ -27,6 +27,7 @@ public class Set_Allo extends AppCompatActivity {
     CheckBox defaultAllo;
     CheckBox customAllo;
     boolean isDefault;
+    public int weight;
 
     ArrayList<CheckBox> mCheckBoxes = new ArrayList<CheckBox>();
 
@@ -167,8 +168,18 @@ public class Set_Allo extends AppCompatActivity {
                 ed.putBoolean("Allo", isDefault);
                 ed.commit();
 
-                ((MainActivity) MainActivity.mContext).account.setRecommendDrink(dailyGoal);
-                ((MainActivity) MainActivity.mContext).confirm();
+                if(isDefault) {
+                    weight= ((MainActivity)MainActivity.mContext).account.getWeight();
+                    dailyGoal= weight*30;
+                    ((MainActivity) MainActivity.mContext).account.setRecommendDrink(dailyGoal);
+                    ((MainActivity) MainActivity.mContext).confirm();
+                }
+                else
+                {
+                    ((MainActivity) MainActivity.mContext).account.setRecommendDrink(dailyGoal);
+                    ((MainActivity) MainActivity.mContext).confirm();
+
+                }
 
                 Toast.makeText(getApplicationContext(),"수정완료",Toast.LENGTH_LONG).show();
 
