@@ -78,15 +78,37 @@ public class Change_cup extends AppCompatActivity {
             mList.add(cupList.get(i).getCupName());
         }
 
+        mList.add("나의컵1");
+
 
         // init recyclerView
         mBinding.recyclerView1.setLayoutManager(new LinearLayoutManager(this));
+
         mBinding.recyclerView1.setAdapter(new RecyclerView.Adapter() {
             @Override
-            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
                 CustViewHolder holder1 = (CustViewHolder) holder;
                 holder1.setData(mList.get(position));
                 //holder1.setImage(cupInfoArrayList.get(position));
+
+                holder1.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //TODO: Change Using cup
+                        Cup thisCup =((MainActivity)MainActivity.mContext).account.getCupList().get(position);
+                        ((MainActivity)MainActivity.mContext).cup.setCid(thisCup.getCid());
+                        ((MainActivity)MainActivity.mContext).cup.setUid(thisCup.getUid());
+                        ((MainActivity)MainActivity.mContext).cup.setCupName(thisCup.getCupName());
+                        ((MainActivity)MainActivity.mContext).cup.setCupWeight(thisCup.getCupWeight());
+                        ((MainActivity)MainActivity.mContext).chanceCup();
+
+                        mToast = Toast.makeText(Change_cup.this,thisCup.getCupName() + "을 사용합니다", Toast.LENGTH_SHORT);
+                        mToast.show();
+
+                    }
+                });
+
 
             }
 
@@ -157,7 +179,7 @@ public class Change_cup extends AppCompatActivity {
         public void setData(String data) {
             mBinding.tvName.setText(data);
         }
-        public  void setImage(int image) { mBinding.ivPicture.setImageResource(image);}
+        public void setImage(int image) { mBinding.ivPicture.setImageResource(image);}
     }
 
     ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -178,6 +200,14 @@ public class Change_cup extends AppCompatActivity {
             mBinding.recyclerView1.getAdapter().notifyItemRemoved(position);
 
             //TODO: way to use method ((MainActivity)MainActivity.mContext).deleteCup();
+
+            Cup thisCup =((MainActivity)MainActivity.mContext).account.getCupList().get(position);
+            ((MainActivity)MainActivity.mContext).cup.setCid(thisCup.getCid());
+            ((MainActivity)MainActivity.mContext).cup.setUid(thisCup.getUid());
+            ((MainActivity)MainActivity.mContext).cup.setCupName(thisCup.getCupName());
+            ((MainActivity)MainActivity.mContext).cup.setCupWeight(thisCup.getCupWeight());
+            ((MainActivity)MainActivity.mContext).deleteCup();
+
         }
     };
 
