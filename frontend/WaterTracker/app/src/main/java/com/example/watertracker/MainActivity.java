@@ -312,7 +312,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void cup_set() {
-        final String[] items = new String[]{"나의컵1", "나의컵2", "나의컵3", "나의컵4", "나의컵5"};
+        final String[] items = new String[]{"텀블러", "물컵", "머그컵"};
         final int[] selectedindex = {0};
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
@@ -332,24 +332,18 @@ public class MainActivity extends AppCompatActivity
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(MainActivity.this, MainActivity.class);
                         switch (items[selectedindex[0]]) {
-                            case "나의컵1":
-                                cupImagee.setImageResource(R.drawable.cup1);
-
-                                break;
-                            case "나의컵2":
+                            case "텀블러":
                                 cupImagee.setImageResource(R.drawable.cup2);
 
                                 break;
-                            case "나의컵3":
+                            case "물컵":
+                                cupImagee.setImageResource(R.drawable.cup4);
 
                                 break;
-                            case "나의컵4":
+                            case "머그컵":
+                                cupImagee.setImageResource(R.drawable.cup1);
 
                                 break;
-                            case "나의컵5":
-
-                                break;
-
                         }
 
                     }
