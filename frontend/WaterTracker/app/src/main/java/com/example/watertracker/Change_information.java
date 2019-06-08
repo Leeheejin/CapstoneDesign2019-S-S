@@ -108,6 +108,14 @@ public class Change_information extends AppCompatActivity {
             public void onClick(View v) {
 
 
+                SharedPreferences prefs = getSharedPreferences("SetAllo", MODE_PRIVATE);
+
+                if(prefs.getBoolean("Allo",true))
+                {
+                    ((MainActivity)MainActivity.mContext).account.setRecommendDrink(weight*30);
+                }
+
+
 
                 ((MainActivity)MainActivity.mContext).account.setWeight(weight);
                 ((MainActivity)MainActivity.mContext).confirm();
@@ -115,6 +123,9 @@ public class Change_information extends AppCompatActivity {
                 Log.d(TAG, ((MainActivity)MainActivity.mContext).account.toString());
 
                 Toast.makeText(getApplicationContext(),"수정완료",Toast.LENGTH_LONG).show();
+
+
+
 
 
 
