@@ -74,7 +74,7 @@ public class SaveCupName extends AppCompatActivity {
                 //Change_cup c_cAct = (Change_cup) Change_cup.c_cAct;
                 //c_cAct.finish();
 
-                Intent intent = new Intent(SaveCupName.this, Change_cup.class);
+                Intent intent = new Intent(SaveCupName.this, MainActivity.class);
                 startActivity(intent);
 
 
