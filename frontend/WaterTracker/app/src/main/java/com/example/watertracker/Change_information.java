@@ -99,6 +99,8 @@ public class Change_information extends AppCompatActivity {
         });
 
 
+
+
         btn = (Button)findViewById(R.id.btn_edit);
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +132,14 @@ public class Change_information extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        Intent intent = new Intent(Change_information.this, MainActivity.class);
+        startActivity(intent);
 
     }
 }

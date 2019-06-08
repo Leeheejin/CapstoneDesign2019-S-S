@@ -218,6 +218,14 @@ public class Set_Allo extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed(){
+
+        Intent intent = new Intent(Set_Allo.this, MainActivity.class);
+        startActivity(intent);
+
+    }
+
     public void update(){
         outcome.setText(new StringBuilder().append(dailyGoal));
 
