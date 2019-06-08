@@ -78,8 +78,6 @@ public class Change_cup extends AppCompatActivity {
             mList.add(cupList.get(i).getCupName());
         }
 
-        mList.add("나의컵1");
-
 
         // init recyclerView
         mBinding.recyclerView1.setLayoutManager(new LinearLayoutManager(this));
