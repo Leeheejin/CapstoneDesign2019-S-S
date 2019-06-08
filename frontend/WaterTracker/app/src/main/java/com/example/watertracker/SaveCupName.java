@@ -61,15 +61,13 @@ public class SaveCupName extends AppCompatActivity {
                 ((MainActivity)MainActivity.mContext).cup.setCupName(cupName);
                 ((MainActivity)MainActivity.mContext).cup.setCupWeight(1111);
                 ((MainActivity)MainActivity.mContext).saveCup();
-                
+
                 //long savedCid = ((MainActivity)MainActivity.mContext).account.getCupList().get(0).getCid();
                 //((MainActivity)MainActivity.mContext).cup.setCid(savedCid);
                 //((MainActivity)MainActivity.mContext).chanceCup();
                 //Toast.makeText(SaveCupName.this, "새로운 컵을 사용합니다.", Toast.LENGTH_SHORT).show();
 
                 //cupList.add(cup);
-                ((MainActivity)MainActivity.mContext).getUserInfo();
-
 
                 //Change_cup c_cAct = (Change_cup) Change_cup.c_cAct;
                 //c_cAct.finish();
