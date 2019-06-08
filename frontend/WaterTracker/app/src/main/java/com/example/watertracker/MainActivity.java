@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity
             }catch (InterruptedException e){
                 e.printStackTrace();
             }
-            startActivity(new Intent(this,BluetoothActivity.class));
+            startActivity(new Intent(this,InputCupData.class));
         }
 
         drinkWater();

@@ -112,7 +112,9 @@ public class BluetoothActivity extends AppCompatActivity {
             public void onClick(View v) {
                 bt.send("Text", true);
                 Intent intent = new Intent(
-                        getApplicationContext(), InputCupData.class);
+
+                        //TODO: 분기
+                        getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
