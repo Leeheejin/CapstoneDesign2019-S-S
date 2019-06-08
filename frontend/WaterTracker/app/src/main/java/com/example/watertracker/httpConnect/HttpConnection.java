@@ -89,20 +89,20 @@ public class HttpConnection {
         client.newCall(request).enqueue(callback);
     }
 
-    public void deleteCup(Cup cup) {
+    public void deleteCup(Cup cup, Callback callback) {
 
         Gson gson = new Gson();
         String json = gson.toJson(cup);
 
         Request request = new Request.Builder()
-                .url(url+"/deletecup")
+                .url(url+"/cupdelete")
                 .post(RequestBody.create(MediaType.parse("application/json"), json))
                 .build();
 
-        client.newCall(request);
+        client.newCall(request).enqueue(callback);
     }
 
-    public void cupInfo(Cup cup) {
+    public void cupInfo(Cup cup, Callback callback) {
 
         Gson gson = new Gson();
         String json = gson.toJson(cup);
@@ -112,7 +112,7 @@ public class HttpConnection {
                 .post(RequestBody.create(MediaType.parse("application/json"), json))
                 .build();
 
-        client.newCall(request);
+        client.newCall(request).enqueue(callback);
     }
 
     public void drinkWater(Water water, Callback callback) {

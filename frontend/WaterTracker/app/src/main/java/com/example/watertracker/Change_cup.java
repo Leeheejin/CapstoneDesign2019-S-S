@@ -74,6 +74,7 @@ public class Change_cup extends AppCompatActivity {
                     public void onClick(View v) {
 
                         ((MainActivity)MainActivity.mContext).cup = cupList.get(position);
+                        ((MainActivity)MainActivity.mContext).account.setCurrentCup(cupList.get(position));
                         Log.d("Cup Change Method : ", ((MainActivity)MainActivity.mContext).cup.toString());
                         ((MainActivity)MainActivity.mContext).chanceCup();
 
@@ -176,31 +177,24 @@ public class Change_cup extends AppCompatActivity {
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
             // 삭제되는 아이템의 포지션을 가져온다
             final int position = viewHolder.getAdapterPosition();
-            // 데이터의 해당 포지션을 삭제한다
-            showToast("on remove " + mList.remove(position));
-            // 아답타에게 알린다
-            mBinding.recyclerView1.getAdapter().notifyItemRemoved(position);
 
-            //TODO: way to use method ((MainActivity)MainActivity.mContext).deleteCup();
+            if (((MainActivity)MainActivity.mContext).account.getCurrentCup().getCid() != cupList.get(position).getCid()) {
 
-            long temp_Cid = ((MainActivity)MainActivity.mContext).cup.getCid();
-            String temp_CupName = ((MainActivity)MainActivity.mContext).cup.getCupName();
-            int temp_CupWeight = ((MainActivity)MainActivity.mContext).cup.getCupWeight();
+                mList.remove(position);
+                mBinding.recyclerView1.getAdapter().notifyItemRemoved(position);
+                ((MainActivity)MainActivity.mContext).cup = cupList.get(position);
+                ((MainActivity)MainActivity.mContext).deleteCup();
+                Log.d("Cup Delete Method : ", ((MainActivity)MainActivity.mContext).cup.toString());
 
-            Cup thisCup =((MainActivity)MainActivity.mContext).account.getCupList().get(position);
-            ((MainActivity)MainActivity.mContext).cup.setCid(thisCup.getCid());
-            ((MainActivity)MainActivity.mContext).cup.setUid(thisCup.getUid());
-            ((MainActivity)MainActivity.mContext).cup.setCupName(thisCup.getCupName());
-            ((MainActivity)MainActivity.mContext).cup.setCupWeight(thisCup.getCupWeight());
-            ((MainActivity)MainActivity.mContext).deleteCup();
-
-            ((MainActivity)MainActivity.mContext).cup.setCid(temp_Cid);
-            ((MainActivity)MainActivity.mContext).cup.setCupName(temp_CupName);
-            ((MainActivity)MainActivity.mContext).cup.setCupWeight(temp_CupWeight);
-
-            ((MainActivity)MainActivity.mContext).cup = cupList.get(position);
-            Log.d("Cup Delete Method : ", ((MainActivity)MainActivity.mContext).cup.toString());
-            ((MainActivity)MainActivity.mContext).chanceCup();
+            }
+            else {
+                mList.remove(position);
+                mBinding.recyclerView1.getAdapter().notifyItemRemoved(position);
+                mList.add(position,cupList.get(position).getCupName());
+                mBinding.recyclerView1.getAdapter().notifyItemInserted(position);
+                mToast = Toast.makeText(Change_cup.this, "현재 사용중인 컵은 삭제가 불가능합니다.", Toast.LENGTH_SHORT);
+                mToast.show();
+            }
 
         }
     };

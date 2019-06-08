@@ -61,7 +61,7 @@ public class SaveCupName extends AppCompatActivity {
                 ((MainActivity)MainActivity.mContext).cup.setCupName(cupName);
                 ((MainActivity)MainActivity.mContext).cup.setCupWeight(1111);
                 ((MainActivity)MainActivity.mContext).saveCup();
-
+                
                 //long savedCid = ((MainActivity)MainActivity.mContext).account.getCupList().get(0).getCid();
                 //((MainActivity)MainActivity.mContext).cup.setCid(savedCid);
                 //((MainActivity)MainActivity.mContext).chanceCup();
@@ -73,6 +73,8 @@ public class SaveCupName extends AppCompatActivity {
 
                 //Change_cup c_cAct = (Change_cup) Change_cup.c_cAct;
                 //c_cAct.finish();
+
+                ((MainActivity)MainActivity.mContext).getUserInfo();
 
                 Intent intent = new Intent(SaveCupName.this, MainActivity.class);
                 startActivity(intent);
