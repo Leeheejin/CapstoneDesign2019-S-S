@@ -18,11 +18,17 @@ import app.akexorcist.bluetotohspp.library.DeviceList;
 public class BluetoothActivity extends AppCompatActivity {
 
     private BluetoothSPP bt;
+    public static Context mBluetooth;
+    public Float preData = 0.0f;
+    public Float postData = 0.0f;
+    public Float drinkData = 0.0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth);
+
+        mBluetooth = this;
 
         bt = new BluetoothSPP(this); //Initializing
 
@@ -36,24 +42,25 @@ public class BluetoothActivity extends AppCompatActivity {
         bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() { //데이터 수신
             public void onDataReceived(byte[] data, String message) {
 
-                Log.d("post : ", ((MainActivity) MainActivity.mContext).postData.toString());
-                Log.d("post : ", ((MainActivity) MainActivity.mContext).preData.toString());
 
-                if (((MainActivity) MainActivity.mContext).postData != 0.0f) {
+                if (((BluetoothActivity) BluetoothActivity.mBluetooth).postData != 0.0f) {
 
-                    ((MainActivity) MainActivity.mContext).preData = Float.parseFloat(message);
+                    ((BluetoothActivity) BluetoothActivity.mBluetooth).preData = Float.parseFloat(message);
 
-                    if (((MainActivity) MainActivity.mContext).preData < ((MainActivity) MainActivity.mContext).postData) {
+                    if (((BluetoothActivity) BluetoothActivity.mBluetooth).preData < ((BluetoothActivity) BluetoothActivity.mBluetooth).postData) {
 
-                        ((MainActivity) MainActivity.mContext).drinkData = ((MainActivity) MainActivity.mContext).postData - ((MainActivity) MainActivity.mContext).preData;
+                        ((BluetoothActivity) BluetoothActivity.mBluetooth).drinkData = ((BluetoothActivity) BluetoothActivity.mBluetooth).postData - ((BluetoothActivity) BluetoothActivity.mBluetooth).preData;
                     }
                     else {
-                        ((MainActivity) MainActivity.mContext).postData = ((MainActivity) MainActivity.mContext).preData;
+                        ((BluetoothActivity) BluetoothActivity.mBluetooth).postData = ((BluetoothActivity) BluetoothActivity.mBluetooth).preData;
                     }
 
                 } else {
-                    ((MainActivity) MainActivity.mContext).postData = Float.parseFloat(message);
+                    ((BluetoothActivity) BluetoothActivity.mBluetooth).postData = Float.parseFloat(message);
                 }
+
+                Log.d("post : ", ((BluetoothActivity) BluetoothActivity.mBluetooth).postData.toString());
+                Log.d("pre : ", ((BluetoothActivity) BluetoothActivity.mBluetooth).preData.toString());
             }
         });
 

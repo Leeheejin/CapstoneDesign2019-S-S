@@ -70,9 +70,6 @@ public class MainActivity extends AppCompatActivity
     public float dailyGoal;
     public  int dailyPercent;
     private ArrayList<Integer> cupImageArrayList = new ArrayList<>();
-    public Float preData = 0.0f;
-    public Float postData = 0.0f;
-    public Float drinkData = 0.0f;
 
 
 
@@ -519,16 +516,16 @@ public class MainActivity extends AppCompatActivity
             public void run() {
                 ((MainActivity) MainActivity.mContext).water.setUid((long)1);
                 while (true) {
-                    if (((MainActivity)MainActivity.mContext).drinkData != 0.0f) {
+                    if (((BluetoothActivity) BluetoothActivity.mBluetooth).drinkData != 0.0f) {
                         Cup cup = ((MainActivity)MainActivity.mContext).account.getCurrentCup();
 
                         ((MainActivity) MainActivity.mContext).water.setCid(cup.getCid());
-                        ((MainActivity) MainActivity.mContext).water.setLastDrink(((MainActivity)MainActivity.mContext).drinkData);
+                        ((MainActivity) MainActivity.mContext).water.setLastDrink(((BluetoothActivity) BluetoothActivity.mBluetooth).drinkData);
                         ((MainActivity) MainActivity.mContext).water.setLastDrinkDate(null);
 
-                        ((MainActivity)MainActivity.mContext).drinkData = 0.0f;
-
                         httpConn.drinkWater(((MainActivity) MainActivity.mContext).water, waterCallback);
+
+                        ((BluetoothActivity) BluetoothActivity.mBluetooth).drinkData = 0.0f;
 
                         Log.d(TAG, ((MainActivity) MainActivity.mContext).water.toString());
                     }
@@ -589,10 +586,6 @@ public class MainActivity extends AppCompatActivity
         public void onResponse(Call call, Response response) throws IOException {
 
             final byte[] responseBytes = response.body().bytes();
-            ObjectMapper objectMapper = new ObjectMapper();
-            water = objectMapper.readValue(responseBytes, Water.class);
-
-            Log.d(TAG, "Water Info: " + water.toString());
         }
     };
 
