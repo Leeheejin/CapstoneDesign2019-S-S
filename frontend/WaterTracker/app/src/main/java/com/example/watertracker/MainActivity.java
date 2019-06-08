@@ -526,11 +526,11 @@ public class MainActivity extends AppCompatActivity
                         ((MainActivity) MainActivity.mContext).water.setLastDrink(((MainActivity)MainActivity.mContext).drinkData);
                         ((MainActivity) MainActivity.mContext).water.setLastDrinkDate(null);
 
-                        Log.d(TAG, ((MainActivity) MainActivity.mContext).water.toString());
                         ((MainActivity)MainActivity.mContext).drinkData = 0.0f;
 
-                        httpConn.drinkWater(((MainActivity) MainActivity.mContext).water);
-                        Log.d(TAG, "Water Info: " + water.toString());
+                        httpConn.drinkWater(((MainActivity) MainActivity.mContext).water, waterCallback);
+
+                        Log.d(TAG, ((MainActivity) MainActivity.mContext).water.toString());
                     }
                 }
 
@@ -576,6 +576,23 @@ public class MainActivity extends AppCompatActivity
             handler.sendMessage(message);
 
             Log.d(TAG, "Cup Info: " + ((MainActivity)MainActivity.mContext).cup.toString());
+        }
+    };
+
+    public final Callback waterCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            Log.d(TAG, "콜백오류:"+e.getMessage());
+            Log.d(TAG, e.toString());
+        }
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+
+            final byte[] responseBytes = response.body().bytes();
+            ObjectMapper objectMapper = new ObjectMapper();
+            water = objectMapper.readValue(responseBytes, Water.class);
+
+            Log.d(TAG, "Water Info: " + water.toString());
         }
     };
 

@@ -36,6 +36,9 @@ public class BluetoothActivity extends AppCompatActivity {
         bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() { //데이터 수신
             public void onDataReceived(byte[] data, String message) {
 
+                Log.d("post : ", ((MainActivity) MainActivity.mContext).postData.toString());
+                Log.d("post : ", ((MainActivity) MainActivity.mContext).preData.toString());
+
                 if (((MainActivity) MainActivity.mContext).postData != 0.0f) {
 
                     ((MainActivity) MainActivity.mContext).preData = Float.parseFloat(message);
