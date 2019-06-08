@@ -14,11 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Change_information extends AppCompatActivity {
-    //String userName; //TODO : user name
-//    public int weight = ((MainActivity)MainActivity.mContext).account.getWeight();
-    public int weight;
-    public int avg_drop; //TODO : 평균 한 모금 설정
-    private static final String TAG = "InfoActivity";
+
     // 싱글톤 패턴을 사용하여 이 어플리케이션에서 전역으로 사용하는 하나의 변수를 접근하기 위한 방법
     // ((MainActivity)MainActivity.mContext) 에 . 을 찍어서 해당 변수, 혹은 함수에 접근할 수 있음
     // ((MainActivity)MainActivity.mContext).account 는 유저의 정보
@@ -55,6 +51,9 @@ public class Change_information extends AppCompatActivity {
     // ((MainActivity)MainActivity.mContext).deleteCup();
     // 과 같이 전송해야 정상 처리 됨. 만약 uid,cid를 포함하지 않고 전송 시에는 오류를 반환함.
 
+    public int weight;
+    public int avg_drop; //TODO : 평균 한 모금 설정
+    private static final String TAG = "InfoActivity";
 
     Button btn;
     EditText putweight;
@@ -66,20 +65,14 @@ public class Change_information extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_information);
 
-
-        avg_drop = ((MainActivity)MainActivity.mContext).account.getOneDrink();
-
-        // TODO :: ml_text 가 존재하지 않아서 주석 처리
+        avg_drop = 0;
         avgdrop = (TextView)findViewById(R.id.ml_text);
-
         avgdrop.setText(avg_drop+"");
 
         putweight = (EditText)findViewById(R.id.put_weight);
-
         mainweight = ((MainActivity)MainActivity.mContext).account.getWeight();
+
         putweight.setText(mainweight+"");
-
-
 
         putweight.addTextChangedListener(new TextWatcher() {
             @Override
@@ -112,10 +105,6 @@ public class Change_information extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                SharedPreferences isNew = getSharedPreferences("isNew", MODE_PRIVATE);
-                SharedPreferences.Editor ed = isNew.edit();
-                ed.putBoolean("New", false);
-                ed.commit();
 
 
                 ((MainActivity)MainActivity.mContext).account.setWeight(weight);
@@ -125,8 +114,20 @@ public class Change_information extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"수정완료",Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(Change_information.this, MainActivity.class);
-                startActivity(intent);
+
+
+                SharedPreferences isNew = getSharedPreferences("isNew", MODE_PRIVATE);
+
+                if(isNew.getBoolean("New", true)) {
+
+                    Intent intent = new Intent(getApplicationContext(), Set_Allo.class);
+                    startActivity(intent);
+
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
 

@@ -76,14 +76,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mContext = this;
+        getUserInfo();
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         SharedPreferences isNew = getSharedPreferences("isNew", MODE_PRIVATE);
-        isNew.getBoolean("New",true);
 
-        if(isNew.getBoolean("New",true) == true)
+        if(isNew.getBoolean("New", true))
         {
             try{
                 Thread.sleep(1000);
@@ -91,13 +94,7 @@ public class MainActivity extends AppCompatActivity
                 e.printStackTrace();
             }
             startActivity(new Intent(this,BluetoothActivity.class));
-
-
         }
-
-
-        mContext = this;
-        getUserInfo();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -188,7 +185,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked == true){
+                if (isChecked){
 
                     /*Test
                     dailySum = dailySum +100;
