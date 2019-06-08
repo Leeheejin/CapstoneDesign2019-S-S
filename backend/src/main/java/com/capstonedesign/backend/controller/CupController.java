@@ -79,7 +79,7 @@ public class CupController {
     }
 
     @PostMapping(path = "/cupdelete")
-    public Account deleteCup(@RequestBody Cup cup) {
+    public Cup deleteCup(@RequestBody Cup cup) {
 
         Account account = userService.getUserInfo(cup.getUid());
         Cup toDeleteCup = cupService.getCupInfo(cup.getCid());
@@ -94,6 +94,6 @@ public class CupController {
         userService.saveUserInfo(account);
         cupService.deleteCup(cup);
 
-        return account;
+        return toDeleteCup;
     }
 }

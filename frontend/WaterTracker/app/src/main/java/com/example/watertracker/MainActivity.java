@@ -449,7 +449,7 @@ public class MainActivity extends AppCompatActivity
     public void confirm() {
         new Thread() {
             public void run() {
-                httpConn.confirm(account, userCallback);
+                httpConn.confirm(((MainActivity)MainActivity.mContext).account, userCallback);
             }
         }.start();
     }
@@ -457,7 +457,7 @@ public class MainActivity extends AppCompatActivity
     public void saveCup() {
         new Thread() {
             public void run() {
-                httpConn.saveCup(cup, cupCallback);
+                httpConn.saveCup(((MainActivity)MainActivity.mContext).cup, cupCallback);
             }
         }.start();
     }
@@ -466,7 +466,7 @@ public class MainActivity extends AppCompatActivity
         new Thread() {
             public void run() {
                 cup.setUid((long) 1);
-                httpConn.changeCup(cup, cupCallback);
+                httpConn.changeCup(((MainActivity)MainActivity.mContext).cup, cupCallback);
             }
         }.start();
     }
@@ -474,7 +474,7 @@ public class MainActivity extends AppCompatActivity
     public void editCup() {
         new Thread() {
             public void run() {
-                httpConn.editCup(cup, cupCallback);
+                httpConn.editCup(((MainActivity)MainActivity.mContext).cup, cupCallback);
             }
         }.start();
     }
@@ -483,8 +483,7 @@ public class MainActivity extends AppCompatActivity
 
         new Thread() {
             public void run() {
-                cup.setUid((long) 1);
-                httpConn.deleteCup(cup);
+                httpConn.deleteCup(((MainActivity)MainActivity.mContext).cup, cupCallback);
             }
         }.start();
     }
@@ -492,7 +491,7 @@ public class MainActivity extends AppCompatActivity
     public void cupInfo() {
         new Thread() {
             public void run() {
-                httpConn.cupInfo(cup);
+                httpConn.cupInfo(((MainActivity)MainActivity.mContext).cup, cupCallback);
             }
         }.start();
     }
@@ -500,7 +499,7 @@ public class MainActivity extends AppCompatActivity
     public void drinkWater() {
         new Thread() {
             public void run() {
-                httpConn.drinkWater(water, waterCallback);
+                httpConn.drinkWater(((MainActivity)MainActivity.mContext).water, waterCallback);
             }
         }.start();
     }

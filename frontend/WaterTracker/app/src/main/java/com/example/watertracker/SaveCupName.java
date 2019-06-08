@@ -61,10 +61,9 @@ public class SaveCupName extends AppCompatActivity {
                 ((MainActivity)MainActivity.mContext).cup.setCupWeight(1111);
                 ((MainActivity)MainActivity.mContext).saveCup();
 
-                //cupList.add(cup);
                 ((MainActivity)MainActivity.mContext).getUserInfo();
 
-                Intent intent = new Intent(SaveCupName.this, Change_cup.class);
+                Intent intent = new Intent(SaveCupName.this, MainActivity.class);
                 startActivity(intent);
 
 
