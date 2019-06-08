@@ -31,10 +31,18 @@ public class WaterController {
         account.setNowDrink(account.getNowDrink() + water.getLastDrink());
         account.addLogInList(water.getLastDrink());
 
+        Float temp = 0.0f;
+
+        for (int i =0; i < account.getWaterLog().size(); i++) {
+            temp += account.getWaterLog().get(i);
+        }
+
+        account.setOneDrink(temp/account.getWaterLog().size());
+
         if (account.getWaterLog().size() > 10) {
             account.setWaterLog(new ArrayList<Float>());
         }
-        
+
         account.addDateInList(water.getLastDrinkDate());
 
         userService.saveUserInfo(account);

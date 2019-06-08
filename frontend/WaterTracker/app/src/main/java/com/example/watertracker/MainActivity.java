@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity
     public Account account = new Account();
     public Cup cup = new Cup();
     public Water water = new Water();
+    public Water tempWater = new Water();
 
     public static Context mContext;
     public TextView remainToGoal;
@@ -132,9 +133,9 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 dailySum = ((MainActivity)MainActivity.mContext).account.getNowDrink();
-                //int avgdrop = ((MainActivity)MainActivity.mContext).account.getOneDrink();
+                Float avgdrop = ((MainActivity)MainActivity.mContext).account.getOneDrink();
 
-                int avgdrop = 27; //test
+                //Float avgdrop = 46f; //test
                 dailySum = dailySum + avgdrop;
 
                 ((MainActivity)MainActivity.mContext).account.setNowDrink(dailySum);
@@ -518,16 +519,19 @@ public class MainActivity extends AppCompatActivity
                     if (((BluetoothActivity) BluetoothActivity.mBluetooth).drinkData != 0.0f) {
                         Cup cup = ((MainActivity)MainActivity.mContext).account.getCurrentCup();
 
+                        ((MainActivity)MainActivity.mContext).water.setUid((long)1);
                         ((MainActivity) MainActivity.mContext).water.setCid(cup.getCid());
                         ((MainActivity) MainActivity.mContext).water.setLastDrink(((BluetoothActivity) BluetoothActivity.mBluetooth).drinkData);
-                        ((MainActivity) MainActivity.mContext).water.setLastDrinkDate(null);
 
-                        httpConn.drinkWater(((MainActivity) MainActivity.mContext).water, waterCallback);
+                        if (!((MainActivity) MainActivity.mContext).tempWater.getLastDrink().equals(((MainActivity) MainActivity.mContext).water.getLastDrink())) {
+                            httpConn.drinkWater(((MainActivity) MainActivity.mContext).water, waterCallback);
+                            ((MainActivity) MainActivity.mContext).tempWater = ((MainActivity) MainActivity.mContext).water;
+                        }
 
                         Log.d(TAG, ((MainActivity) MainActivity.mContext).water.toString());
 
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep(3000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
