@@ -7,6 +7,8 @@ import com.capstonedesign.backend.service.WaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @CrossOrigin(origins = "*")
 @RestController
 public class WaterController {
@@ -22,17 +24,23 @@ public class WaterController {
     }
 
     @PostMapping(path = "/drink")
-    public void userDrinkPerOneTime(@RequestBody Water water) {
+    public Account userDrinkPerOneTime(@RequestBody Water water) {
 
         Account account =  userService.getUserInfo(water.getUid());
 
         account.setNowDrink(account.getNowDrink() + water.getLastDrink());
         account.addLogInList(water.getLastDrink());
+
+        if (account.getWaterLog().size() > 10) {
+            account.setWaterLog(new ArrayList<Float>());
+        }
+        
         account.addDateInList(water.getLastDrinkDate());
 
         userService.saveUserInfo(account);
         waterService.saveDrinkLog(water);
-        
+
+        return account;
     }
 
     @PostMapping(path ="/drinkinfo")

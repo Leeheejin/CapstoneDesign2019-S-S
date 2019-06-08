@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
     public ImageView cupImagee;
     public View waterdrop;
     public int remaintogoal;
-    public int dailySum;
+    public Float dailySum;
     public float dailyGoal;
     public  int dailyPercent;
     private ArrayList<Integer> cupImageArrayList = new ArrayList<>();
@@ -140,7 +140,6 @@ public class MainActivity extends AppCompatActivity
                 ((MainActivity)MainActivity.mContext).account.setNowDrink(dailySum);
                 ((MainActivity)MainActivity.mContext).confirm();
                 Toast.makeText(MainActivity.this, "물을 한모금 마셨어요.", Toast.LENGTH_SHORT).show();
-                setScreen(); // test
             }
         });
 
@@ -525,12 +524,16 @@ public class MainActivity extends AppCompatActivity
 
                         httpConn.drinkWater(((MainActivity) MainActivity.mContext).water, waterCallback);
 
-                        ((BluetoothActivity) BluetoothActivity.mBluetooth).drinkData = 0.0f;
-
                         Log.d(TAG, ((MainActivity) MainActivity.mContext).water.toString());
+
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        ((BluetoothActivity) BluetoothActivity.mBluetooth).drinkData = 0.0f;
                     }
                 }
-
             }
         }.start();
     }
@@ -584,8 +587,14 @@ public class MainActivity extends AppCompatActivity
         }
         @Override
         public void onResponse(Call call, Response response) throws IOException {
-
             final byte[] responseBytes = response.body().bytes();
+            ObjectMapper objectMapper = new ObjectMapper();
+            ((MainActivity)MainActivity.mContext).account = objectMapper.readValue(responseBytes, Account.class);
+
+            Message message = handler.obtainMessage();
+            handler.sendMessage(message);
+
+            Log.d(TAG, "Account Info: " + ((MainActivity)MainActivity.mContext).account.toString());
         }
     };
 

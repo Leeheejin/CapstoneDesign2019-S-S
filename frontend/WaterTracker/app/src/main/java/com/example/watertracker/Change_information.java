@@ -13,6 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import lombok.ToString;
+
 public class Change_information extends AppCompatActivity {
 
     // 싱글톤 패턴을 사용하여 이 어플리케이션에서 전역으로 사용하는 하나의 변수를 접근하기 위한 방법
@@ -52,7 +56,7 @@ public class Change_information extends AppCompatActivity {
     // 과 같이 전송해야 정상 처리 됨. 만약 uid,cid를 포함하지 않고 전송 시에는 오류를 반환함.
 
     public int weight;
-    public int avg_drop; //TODO : 평균 한 모금 설정
+    public Float avg_drop = 0.0f; //TODO : 평균 한 모금 설정
     private static final String TAG = "InfoActivity";
 
     Button btn;
@@ -65,7 +69,19 @@ public class Change_information extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_information);
 
-        avg_drop = 0;
+        int size = ((MainActivity)MainActivity.mContext).account.getWaterLog().size();
+
+        if (size > 0) {
+            ArrayList<Float> tempList =  ((MainActivity) MainActivity.mContext).account.getWaterLog();
+            Log.d(TAG, tempList.toString());
+            for (int i = 0; i < size; i++) {
+                avg_drop += tempList.get(i);
+            }
+            avg_drop /= size;
+
+        } else {
+            avg_drop = 0.0f;
+        }
         avgdrop = (TextView)findViewById(R.id.ml_text);
         avgdrop.setText(avg_drop+"");
 

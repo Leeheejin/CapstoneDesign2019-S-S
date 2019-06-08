@@ -41,22 +41,21 @@ public class BluetoothActivity extends AppCompatActivity {
 
         bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() { //데이터 수신
             public void onDataReceived(byte[] data, String message) {
-
+                Float weightData = Float.parseFloat(message);
 
                 if (((BluetoothActivity) BluetoothActivity.mBluetooth).postData != 0.0f) {
 
-                    ((BluetoothActivity) BluetoothActivity.mBluetooth).preData = Float.parseFloat(message);
+                    ((BluetoothActivity) BluetoothActivity.mBluetooth).preData = weightData;
 
-                    if (((BluetoothActivity) BluetoothActivity.mBluetooth).preData < ((BluetoothActivity) BluetoothActivity.mBluetooth).postData) {
+                    if (((BluetoothActivity) BluetoothActivity.mBluetooth).preData + 0.5f < ((BluetoothActivity) BluetoothActivity.mBluetooth).postData) {
 
                         ((BluetoothActivity) BluetoothActivity.mBluetooth).drinkData = ((BluetoothActivity) BluetoothActivity.mBluetooth).postData - ((BluetoothActivity) BluetoothActivity.mBluetooth).preData;
                     }
-                    else {
-                        ((BluetoothActivity) BluetoothActivity.mBluetooth).postData = ((BluetoothActivity) BluetoothActivity.mBluetooth).preData;
-                    }
+
+                    ((BluetoothActivity) BluetoothActivity.mBluetooth).postData = ((BluetoothActivity) BluetoothActivity.mBluetooth).preData;
 
                 } else {
-                    ((BluetoothActivity) BluetoothActivity.mBluetooth).postData = Float.parseFloat(message);
+                    ((BluetoothActivity) BluetoothActivity.mBluetooth).postData = weightData;
                 }
 
                 Log.d("post : ", ((BluetoothActivity) BluetoothActivity.mBluetooth).postData.toString());
