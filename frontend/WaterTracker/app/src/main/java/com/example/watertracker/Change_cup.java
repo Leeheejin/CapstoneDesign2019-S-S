@@ -80,7 +80,8 @@ public class Change_cup extends AppCompatActivity {
 
 
         // init recyclerView
-        mBinding.recyclerView1.setLayoutManager(new LinearLayoutManager(this));
+        mBinding.recyclerView1.setLayoutManager(new LinearLayoutManager(
+                this));
 
         mBinding.recyclerView1.setAdapter(new RecyclerView.Adapter() {
             @Override
@@ -199,12 +200,20 @@ public class Change_cup extends AppCompatActivity {
 
             //TODO: way to use method ((MainActivity)MainActivity.mContext).deleteCup();
 
+            long temp_Cid = ((MainActivity)MainActivity.mContext).cup.getCid();
+            String temp_CupName = ((MainActivity)MainActivity.mContext).cup.getCupName();
+            int temp_CupWeight = ((MainActivity)MainActivity.mContext).cup.getCupWeight();
+
             Cup thisCup =((MainActivity)MainActivity.mContext).account.getCupList().get(position);
             ((MainActivity)MainActivity.mContext).cup.setCid(thisCup.getCid());
             ((MainActivity)MainActivity.mContext).cup.setUid(thisCup.getUid());
             ((MainActivity)MainActivity.mContext).cup.setCupName(thisCup.getCupName());
             ((MainActivity)MainActivity.mContext).cup.setCupWeight(thisCup.getCupWeight());
             ((MainActivity)MainActivity.mContext).deleteCup();
+
+            ((MainActivity)MainActivity.mContext).cup.setCid(temp_Cid);
+            ((MainActivity)MainActivity.mContext).cup.setCupName(temp_CupName);
+            ((MainActivity)MainActivity.mContext).cup.setCupWeight(temp_CupWeight);
 
         }
     };

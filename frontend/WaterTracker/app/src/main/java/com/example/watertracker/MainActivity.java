@@ -39,6 +39,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import okhttp3.Call;
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity
     public int dailySum;
     public float dailyGoal;
     public  int dailyPercent;
+    private ArrayList<Integer> cupImageArrayList = new ArrayList<>();
 
 
 
@@ -97,9 +99,19 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        cupImageArrayList.add(R.drawable.cup2);
+        cupImageArrayList.add(R.drawable.cup4);
+        cupImageArrayList.add(R.drawable.cup1);
+
+
         cupImage = findViewById(R.id.imageView2);
         cupImagee= findViewById(R.id.imageView2);
         waterdrop= findViewById(R.id.water_prog);
+
+
+        SharedPreferences image_cup = getSharedPreferences("CupImage", MODE_PRIVATE);
+        cupImagee.setImageResource(cupImageArrayList.get(image_cup.getInt("CupNumber",0)));
+
 
         waterdrop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -314,7 +326,6 @@ public class MainActivity extends AppCompatActivity
     public void cup_set() {
         final String[] items = new String[]{"텀블러", "물컵", "머그컵"};
         final int[] selectedindex = {0};
-
         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
         dialog.setTitle("컵 이미지 설정")
                 .setSingleChoiceItems(items
@@ -331,18 +342,23 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        SharedPreferences image_cup = getSharedPreferences("CupImage", MODE_PRIVATE);
+                        SharedPreferences.Editor ed = image_cup.edit();
                         switch (items[selectedindex[0]]) {
                             case "텀블러":
-                                cupImagee.setImageResource(R.drawable.cup2);
-
+                                cupImagee.setImageResource(cupImageArrayList.get(0));
+                                ed.putInt("CupNumber",0);
+                                ed.commit();
                                 break;
                             case "물컵":
-                                cupImagee.setImageResource(R.drawable.cup4);
-
+                                cupImagee.setImageResource(cupImageArrayList.get(1));
+                                ed.putInt("CupNumber",1);
+                                ed.commit();
                                 break;
                             case "머그컵":
-                                cupImagee.setImageResource(R.drawable.cup1);
-
+                                cupImagee.setImageResource(cupImageArrayList.get(2));
+                                ed.putInt("CupNumber",2);
+                                ed.commit();
                                 break;
                         }
 
@@ -357,6 +373,7 @@ public class MainActivity extends AppCompatActivity
 
         remainToGoal = (TextView) findViewById(R.id.txt_remaintToGoal);
         daily_allo = (TextView) findViewById(R.id.txt_allo);
+
 
         dailySum = ((MainActivity)MainActivity.mContext).account.getNowDrink();
         dailyGoal = ((MainActivity)MainActivity.mContext).account.getRecommendDrink();
