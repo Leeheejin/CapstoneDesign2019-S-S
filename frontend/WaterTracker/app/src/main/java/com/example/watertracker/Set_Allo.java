@@ -65,6 +65,7 @@ public class Set_Allo extends AppCompatActivity {
             calWater.setText(weight*30+"mL");
         }
         */
+        weight= ((MainActivity)MainActivity.mContext).account.getWeight();
         calWater.setText(weight*30+"mL");
 
 
