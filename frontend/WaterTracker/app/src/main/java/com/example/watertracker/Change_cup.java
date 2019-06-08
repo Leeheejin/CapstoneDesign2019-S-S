@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,33 +44,6 @@ public class Change_cup extends AppCompatActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_change_cup);
 
         addCup = (Button)findViewById(R.id.cup_change);
-        /*
-        for (int i = 0; i < ((MainActivity)MainActivity.mContext).account.getCupList().size(); i++) {
-            mList.add(String.format("My Cup %s", i + 1));
-
-        }
-        */
-
-        //for (int i = 0; i < 5; i++) {
-        //    cupInfoArrayList.add(R.drawable.cup);
-
-        //}
-        // make sample data
-
-        /*
-
-        for (int i = 0; i < 5; i++) {
-            mList.add(String.format("My Cup %s", i + 1));
-        }
-
-
-        cupInfoArrayList.add(R.drawable.cup1);
-        cupInfoArrayList.add(R.drawable.cup2);
-        cupInfoArrayList.add(R.drawable.cup3);
-        cupInfoArrayList.add(R.drawable.cup4);
-        cupInfoArrayList.add(R.drawable.cup5);
-
-        */
 
         cupList = ((MainActivity)MainActivity.mContext).account.getCupList();
 
@@ -94,15 +68,11 @@ public class Change_cup extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        //TODO: Change Using cup
-                        Cup thisCup =((MainActivity)MainActivity.mContext).account.getCupList().get(position);
-                        ((MainActivity)MainActivity.mContext).cup.setCid(thisCup.getCid());
-                        ((MainActivity)MainActivity.mContext).cup.setUid(thisCup.getUid());
-                        ((MainActivity)MainActivity.mContext).cup.setCupName(thisCup.getCupName());
-                        ((MainActivity)MainActivity.mContext).cup.setCupWeight(thisCup.getCupWeight());
+                        ((MainActivity)MainActivity.mContext).cup = cupList.get(position);
+                        Log.d("Cup Change Method : ", ((MainActivity)MainActivity.mContext).cup.toString());
                         ((MainActivity)MainActivity.mContext).chanceCup();
 
-                        mToast = Toast.makeText(Change_cup.this,thisCup.getCupName() + "을 사용합니다", Toast.LENGTH_SHORT);
+                        mToast = Toast.makeText(Change_cup.this,((MainActivity)MainActivity.mContext).cup.getCupName() + "을 사용합니다", Toast.LENGTH_SHORT);
                         mToast.show();
 
                     }
@@ -214,6 +184,10 @@ public class Change_cup extends AppCompatActivity {
             ((MainActivity)MainActivity.mContext).cup.setCid(temp_Cid);
             ((MainActivity)MainActivity.mContext).cup.setCupName(temp_CupName);
             ((MainActivity)MainActivity.mContext).cup.setCupWeight(temp_CupWeight);
+
+            ((MainActivity)MainActivity.mContext).cup = cupList.get(position);
+            Log.d("Cup Delete Method : ", ((MainActivity)MainActivity.mContext).cup.toString());
+            ((MainActivity)MainActivity.mContext).chanceCup();
 
         }
     };
