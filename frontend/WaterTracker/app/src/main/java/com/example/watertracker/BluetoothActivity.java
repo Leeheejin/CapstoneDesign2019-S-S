@@ -13,97 +13,120 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class BluetoothActivity extends AppCompatActivity implements OnClickListener
-{
+import app.akexorcist.bluetotohspp.library.BluetoothSPP;
+import app.akexorcist.bluetotohspp.library.BluetoothState;
+import app.akexorcist.bluetotohspp.library.DeviceList;
 
-    private static final int REQUEST_ENABLE_BT = 2;
-    private static final int REQUEST_CONNECT_BT = 2;
-    private static final int REQUEST_CONNECT_DEVICE = 1;
-    private static final String TAG = "MainBluetoothActivity";
-    private BluetoothAdapter btAdapter;
-    private BluetoothService btService = null;
-    private Button connect_btn;
-    private TextView txt_Result;
-    private ProgressBar progressCircle;
+public class BluetoothActivity extends AppCompatActivity {
 
-    private final Handler mHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg){
-            super.handleMessage(msg);
-        }
-    };
+    private BluetoothSPP bt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        Log.e(TAG, "onCreate");
         setContentView(R.layout.activity_bluetooth);
+        bt = new BluetoothSPP(this); //Initializing
 
-        connect_btn = (Button)findViewById(R.id.connect_btn);
-        txt_Result = (TextView)findViewById(R.id.bt_name);
-        progressCircle = (ProgressBar)findViewById(R.id.progressBar);
-
-        connect_btn.setOnClickListener(this);
-
-        progressCircle.setVisibility(View.INVISIBLE);
-
-        if(btService == null){
-            btService = new BluetoothService(this, mHandler);
+        if (!bt.isBluetoothAvailable()) { //블루투스 사용 불가
+            Toast.makeText(getApplicationContext()
+                    , "Bluetooth is not available"
+                    , Toast.LENGTH_SHORT).show();
+            finish();
         }
 
-        btAdapter = BluetoothAdapter.getDefaultAdapter();
-        final TextView bt_name = (TextView)findViewById(R.id.bt_name);
-       /*
-        String device_name = btAdapter.getName();
-        bt_name.setText(device_name);
-        */
+        bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() { //데이터 수신
+            public void onDataReceived(byte[] data, String message) {
+                Toast.makeText(BluetoothActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        Button pass_btn = (Button)findViewById(R.id.pass_btn);
-        pass_btn.setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View view){
+        bt.setBluetoothConnectionListener(new BluetoothSPP.BluetoothConnectionListener() { //연결됐을 때
+            public void onDeviceConnected(String name, String address) {
+                Toast.makeText(getApplicationContext()
+                        , "Connected to " + name + "\n" + address
+                        , Toast.LENGTH_SHORT).show();
+            }
+
+            public void onDeviceDisconnected() { //연결해제
+                Toast.makeText(getApplicationContext()
+                        , "Connection lost", Toast.LENGTH_SHORT).show();
+            }
+
+            public void onDeviceConnectionFailed() { //연결실패
+                Toast.makeText(getApplicationContext()
+                        , "Unable to connect", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button btnConnect = findViewById(R.id.btnConnect); //연결시도
+        btnConnect.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (bt.getServiceState() == BluetoothState.STATE_CONNECTED) {
+                    bt.disconnect();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), DeviceList.class);
+                    startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
+                }
+            }
+        });
+
+
+        Button btnPass = findViewById(R.id.btnPass);
+        btnPass.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
                 Intent intent = new Intent(
                         getApplicationContext(), InputCupData.class);
                 startActivity(intent);
             }
         });
+
     }
 
-    @Override
-    public void onClick(View v){
-        if(btService.getDeviceState()){
-            btService.enableBluetooth();    //블루투스 지원 가능한 기기인 경우
-            progressCircle.setVisibility(View.VISIBLE);
-        }
-        else{
-                //블루투스 지원하지 않을 때....
-        }
+    public void onDestroy() {
+        super.onDestroy();
+        bt.stopService(); //블루투스 중지
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-            //블루투스 활성화 알림창 버튼 선택
-        Log.d(TAG, "OnActivityResult" + resultCode);
-
-        switch(requestCode){
-            case REQUEST_CONNECT_DEVICE:
-                if(resultCode == Activity.RESULT_OK){
-                    btService.getDeviceInfo(data);
-                }
-                break;
-            case REQUEST_ENABLE_BT:
-                if (resultCode == Activity.RESULT_OK){
-                        //확인 버튼 누른 경우
-                    btService.scanDevice();
-                }
-                else{
-                    Log.d(TAG, "블루투스 사용 불가능");  //취소 버튼 누른 경우
-                }
-                break;
+    public void onStart() {
+        super.onStart();
+        if (!bt.isBluetoothEnabled()) { //
+            Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(intent, BluetoothState.REQUEST_ENABLE_BT);
+        } else {
+            if (!bt.isServiceAvailable()) {
+                bt.setupService();
+                bt.startService(BluetoothState.DEVICE_OTHER); //DEVICE_ANDROID는 안드로이드 기기 끼리
+                setup();
+            }
         }
     }
 
+    public void setup() {
+        Button btnSend = findViewById(R.id.btnSend); //데이터 전송
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                bt.send("Text", true);
+            }
+        });
+    }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == BluetoothState.REQUEST_CONNECT_DEVICE) {
+            if (resultCode == Activity.RESULT_OK)
+                bt.connect(data);
+        } else if (requestCode == BluetoothState.REQUEST_ENABLE_BT) {
+            if (resultCode == Activity.RESULT_OK) {
+                bt.setupService();
+                bt.startService(BluetoothState.DEVICE_OTHER);
+                setup();
+            } else {
+                Toast.makeText(getApplicationContext()
+                        , "Bluetooth was not enabled."
+                        , Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+    }
 }
-

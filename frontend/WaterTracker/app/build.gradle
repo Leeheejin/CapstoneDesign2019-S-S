@@ -45,6 +45,7 @@ dependencies {
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9'
+    implementation 'com.akexorcist:bluetoothspp:1.0.0'
 }
 repositories {
     mavenCentral()
