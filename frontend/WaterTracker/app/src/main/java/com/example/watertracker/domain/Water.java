@@ -15,7 +15,7 @@ public class Water {
     private Long cid;
     // 컵 id
 
-    private Integer lastDrink;
+    private Float lastDrink;
     // 음수 데이터
 
     private Long lastDrinkDate;

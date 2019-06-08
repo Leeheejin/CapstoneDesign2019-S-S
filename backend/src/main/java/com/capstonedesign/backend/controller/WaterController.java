@@ -22,7 +22,7 @@ public class WaterController {
     }
 
     @PostMapping(path = "/drink")
-    public Water userDrinkPerOneTime(@RequestBody Water water) {
+    public void userDrinkPerOneTime(@RequestBody Water water) {
 
         Account account =  userService.getUserInfo(water.getUid());
 
@@ -32,8 +32,7 @@ public class WaterController {
 
         userService.saveUserInfo(account);
         waterService.saveDrinkLog(water);
-
-        return waterService.getDrinkLogWithDate(water);
+        
     }
 
     @PostMapping(path ="/drinkinfo")

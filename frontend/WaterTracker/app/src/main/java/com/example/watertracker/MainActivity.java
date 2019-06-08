@@ -70,6 +70,9 @@ public class MainActivity extends AppCompatActivity
     public float dailyGoal;
     public  int dailyPercent;
     private ArrayList<Integer> cupImageArrayList = new ArrayList<>();
+    public Float preData = 0.0f;
+    public Float postData = 0.0f;
+    public Float drinkData = 0.0f;
 
 
 
@@ -95,6 +98,8 @@ public class MainActivity extends AppCompatActivity
             }
             startActivity(new Intent(this,BluetoothActivity.class));
         }
+
+        drinkWater();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -512,19 +517,23 @@ public class MainActivity extends AppCompatActivity
     public void drinkWater() {
         new Thread() {
             public void run() {
+                ((MainActivity) MainActivity.mContext).water.setUid((long)1);
                 while (true) {
-                    if ( ((BluetoothActivity)BluetoothActivity.mBluetooth).data != 0.0f) {
+                    if (((MainActivity)MainActivity.mContext).drinkData != 0.0f) {
                         Cup cup = ((MainActivity)MainActivity.mContext).account.getCurrentCup();
 
                         ((MainActivity) MainActivity.mContext).water.setCid(cup.getCid());
-                        ((MainActivity) MainActivity.mContext).water.setLastDrink(((BluetoothActivity)BluetoothActivity.mBluetooth).data);
+                        ((MainActivity) MainActivity.mContext).water.setLastDrink(((MainActivity)MainActivity.mContext).drinkData);
                         ((MainActivity) MainActivity.mContext).water.setLastDrinkDate(null);
 
                         Log.d(TAG, ((MainActivity) MainActivity.mContext).water.toString());
+                        ((MainActivity)MainActivity.mContext).drinkData = 0.0f;
 
-                        httpConn.drinkWater(((MainActivity) MainActivity.mContext).water, waterCallback);
+                        httpConn.drinkWater(((MainActivity) MainActivity.mContext).water);
+                        Log.d(TAG, "Water Info: " + water.toString());
                     }
                 }
+
             }
         }.start();
     }
@@ -567,23 +576,6 @@ public class MainActivity extends AppCompatActivity
             handler.sendMessage(message);
 
             Log.d(TAG, "Cup Info: " + ((MainActivity)MainActivity.mContext).cup.toString());
-        }
-    };
-
-    public final Callback waterCallback = new Callback() {
-        @Override
-        public void onFailure(Call call, IOException e) {
-            Log.d(TAG, "콜백오류:"+e.getMessage());
-            Log.d(TAG, e.toString());
-        }
-        @Override
-        public void onResponse(Call call, Response response) throws IOException {
-
-            final byte[] responseBytes = response.body().bytes();
-            ObjectMapper objectMapper = new ObjectMapper();
-            water = objectMapper.readValue(responseBytes, Water.class);
-
-            Log.d(TAG, "Water Info: " + water.toString());
         }
     };
 

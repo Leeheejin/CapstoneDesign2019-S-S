@@ -16,7 +16,7 @@ public class Water {
 
     private Long cid;
 
-    private Integer lastDrink;
+    private Float lastDrink;
 
     private Long lastDrinkDate;
 }

@@ -19,9 +19,9 @@ public class Account {
 
     private Integer recommendDrink = 0;
 
-    private Integer oneDrink = 0;
+    private Float oneDrink = 0.0f;
 
-    private Integer nowDrink = 0;
+    private Float nowDrink = 0.0f;
 
     @OneToOne(targetEntity = Cup.class, fetch = FetchType.EAGER)
     private Cup currentCup;
@@ -35,11 +35,11 @@ public class Account {
         this.cupList.add(cup);
     }
 
-    private ArrayList<Integer> waterLog = new ArrayList<>();
+    private ArrayList<Float> waterLog = new ArrayList<>();
 
     private ArrayList<Long> waterLongDate = new ArrayList<>();
 
-    public void addLogInList(Integer drinkData) {
+    public void addLogInList(Float drinkData) {
         this.waterLog.add(drinkData);
     }
 
