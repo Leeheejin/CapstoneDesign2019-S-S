@@ -18,7 +18,7 @@ public class SaveCupName extends AppCompatActivity {
 
     Button btn;
     EditText cupNameInput;
-    String cupName;
+    public String cupName;
     private List<Cup> cupList;
 
 

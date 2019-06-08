@@ -128,3 +128,4 @@ Temporary Items
 # End of https://www.gitignore.io/api/java,macos,intellij
 backend/gradle/wrapper/gradle-wrapper.properties
 backend/src/main/resources/application.properties
+*.properties

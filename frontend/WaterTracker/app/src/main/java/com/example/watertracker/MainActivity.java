@@ -466,7 +466,6 @@ public class MainActivity extends AppCompatActivity
         new Thread() {
             public void run() {
                 cup.setUid((long) 1);
-                cup.setCid((long) 3);
                 httpConn.changeCup(cup, cupCallback);
             }
         }.start();
@@ -481,8 +480,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void deleteCup() {
+
         new Thread() {
             public void run() {
+                cup.setUid((long) 1);
                 httpConn.deleteCup(cup);
             }
         }.start();
@@ -536,9 +537,12 @@ public class MainActivity extends AppCompatActivity
 
             final byte[] responseBytes = response.body().bytes();
             ObjectMapper objectMapper = new ObjectMapper();
-            cup = objectMapper.readValue(responseBytes, Cup.class);
+            ((MainActivity)MainActivity.mContext).cup = objectMapper.readValue(responseBytes, Cup.class);
 
-            Log.d(TAG, "Cup Info: " + cup.toString());
+            Message message = handler.obtainMessage();
+            handler.sendMessage(message);
+
+            Log.d(TAG, "Cup Info: " + ((MainActivity)MainActivity.mContext).cup.toString());
         }
     };
 
