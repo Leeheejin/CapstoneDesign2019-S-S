@@ -28,6 +28,10 @@ public class CupController {
         account.addCupInList(cup);
         cupService.saveCupInfo(cup);
 
+        account.setCurrentCup(cup);
+
+        userService.saveUserInfo(account);
+
         return cupService.getCupInfo(cup.getCid());
     }
 
