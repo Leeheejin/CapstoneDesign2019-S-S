@@ -120,16 +120,16 @@ public class History extends AppCompatActivity {
 
         //TODO: 여기에 서버에 저장된 날짜 목록을 루프돌려서 추가한다. (날짜 오름차순으로 먼저 추가되어야 함)
 
-        dummyxVals.add("5/8");
-        dummyxVals.add("5/9");
-        dummyxVals.add("5/10");
-        dummyxVals.add("5/11");
-        dummyxVals.add("5/12");
-        dummyxVals.add("5/13");
-        dummyxVals.add("5/14");
-        dummyxVals.add("5/15");
-        dummyxVals.add("5/16");
-        dummyxVals.add("5/17");
+        dummyxVals.add("6/2");
+        dummyxVals.add("6/3");
+        dummyxVals.add("6/4");
+        dummyxVals.add("6/5");
+        dummyxVals.add("6/6");
+        dummyxVals.add("6/7");
+        dummyxVals.add("6/8");
+        dummyxVals.add("6/9");
+        dummyxVals.add("6/10");
+        dummyxVals.add("6/11");
         //TestDataEnd
 
         //그래프에 값 입력
@@ -174,10 +174,10 @@ public class History extends AppCompatActivity {
 
 
 
-        int acc_day = 6; //누적 사용일
-        int achivement_week = acc_day%7; // 일주일 달성률
-        int achivement_30day = acc_day%30; // 30일 달성률
-        int achivement_100day = acc_day%100; // 100일 달성률
+        int acc_day = 10; //누적 사용일
+        int achivement_week = acc_day%7 -1; // 일주일 달성률
+        int achivement_30day = acc_day%30 -3; // 30일 달성률
+        int achivement_100day = acc_day%100 -3; // 100일 달성률
 
         ProgressBar progress_week = (ProgressBar) findViewById(R.id.progress_goal_week);
         progress_week.setProgress(achivement_week);
