@@ -117,7 +117,7 @@ public class HttpConnection {
         client.newCall(request).enqueue(callback);
     }
 
-    public void drinkWater(Water water) {
+    public void drinkWater(Water water, Callback callback) {
 
         Gson gson = new Gson();
         String json = gson.toJson(water);
@@ -127,6 +127,6 @@ public class HttpConnection {
                 .post(RequestBody.create(MediaType.parse("application/json"), json))
                 .build();
 
-        client.newCall(request);
+        client.newCall(request).enqueue(callback);
     }
 }
