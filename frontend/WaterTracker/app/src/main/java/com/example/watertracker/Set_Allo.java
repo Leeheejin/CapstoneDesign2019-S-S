@@ -1,5 +1,6 @@
 package com.example.watertracker;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,10 +50,23 @@ public class Set_Allo extends AppCompatActivity {
         defaultAllo = (CheckBox) findViewById(R.id.check_1);
         customAllo = (CheckBox) findViewById(R.id.check_2);
 
+
         mCheckBoxes.add(defaultAllo);
         mCheckBoxes.add(customAllo);
 
-        //calWater.setText(weight*30+"mL");
+        /*
+        if(weight == 0)
+        {
+            calWater.setText("0mL");
+        }
+        else
+        {
+            calWater.setText(weight*30+"mL");
+        }
+        */
+        calWater.setText(weight*30+"mL");
+
+
         outcome.setText(dailyGoal+"");
         seekbar.setProgress(dailyGoal);
 

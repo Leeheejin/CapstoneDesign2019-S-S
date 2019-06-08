@@ -129,6 +129,14 @@ public class Change_cup extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed(){
+
+        Intent intent = new Intent(Change_cup.this, MainActivity.class);
+        startActivity(intent);
+
+    }
+
 
 
 
