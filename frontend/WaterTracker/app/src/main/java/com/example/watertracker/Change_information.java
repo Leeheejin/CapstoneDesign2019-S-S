@@ -1,6 +1,7 @@
 package com.example.watertracker;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -110,6 +111,12 @@ public class Change_information extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                SharedPreferences isNew = getSharedPreferences("isNew", MODE_PRIVATE);
+                SharedPreferences.Editor ed = isNew.edit();
+                ed.putBoolean("New", false);
+                ed.commit();
+
 
                 ((MainActivity)MainActivity.mContext).account.setWeight(weight);
                 ((MainActivity)MainActivity.mContext).confirm();

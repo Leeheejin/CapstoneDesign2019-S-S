@@ -73,7 +73,7 @@ public class SaveCupName extends AppCompatActivity {
 
                 //cupList.add(cup);
 
-                Intent intent = new Intent(SaveCupName.this, MainActivity.class);
+                Intent intent = new Intent(SaveCupName.this, Change_information.class);
                 startActivity(intent);
 
 

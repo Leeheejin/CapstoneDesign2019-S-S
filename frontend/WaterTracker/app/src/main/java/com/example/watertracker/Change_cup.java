@@ -2,6 +2,7 @@ package com.example.watertracker;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.media.Image;
 import android.os.Bundle;
@@ -125,8 +126,11 @@ public class Change_cup extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Change_cup.this, MainActivity.class);
-                startActivity(intent);
+                SharedPreferences isNew = getSharedPreferences("isNew", MODE_PRIVATE);
+                SharedPreferences.Editor ed = isNew.edit();
+                ed.putBoolean("New", true);
+                ed.commit();
+
 
             }
         });
