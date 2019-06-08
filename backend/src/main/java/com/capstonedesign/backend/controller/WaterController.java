@@ -26,7 +26,7 @@ public class WaterController {
 
         Account account =  userService.getUserInfo(water.getUid());
 
-        account.setNowDrink(account.getNowDrink()+ water.getLastDrink());
+        account.setNowDrink(account.getNowDrink() + water.getLastDrink());
         account.addLogInList(water.getLastDrink());
         account.addDateInList(water.getLastDrinkDate());
 

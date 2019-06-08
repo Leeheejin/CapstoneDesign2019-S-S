@@ -17,11 +17,15 @@ import app.akexorcist.bluetotohspp.library.DeviceList;
 public class BluetoothActivity extends AppCompatActivity {
 
     private BluetoothSPP bt;
+    public static Context mBluetooth;
+    public int data = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth);
+
+        mBluetooth = this;
 
         bt = new BluetoothSPP(this); //Initializing
 
@@ -34,7 +38,7 @@ public class BluetoothActivity extends AppCompatActivity {
 
         bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() { //데이터 수신
             public void onDataReceived(byte[] data, String message) {
-
+                ((BluetoothActivity)BluetoothActivity.mBluetooth).data = Integer.parseInt(message);
             }
         });
 

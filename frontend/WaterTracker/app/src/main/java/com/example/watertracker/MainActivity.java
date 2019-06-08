@@ -512,7 +512,19 @@ public class MainActivity extends AppCompatActivity
     public void drinkWater() {
         new Thread() {
             public void run() {
-                httpConn.drinkWater(((MainActivity)MainActivity.mContext).water, waterCallback);
+                while (true) {
+                    if ( ((BluetoothActivity)BluetoothActivity.mBluetooth).data != 0.0f) {
+                        Cup cup = ((MainActivity)MainActivity.mContext).account.getCurrentCup();
+
+                        ((MainActivity) MainActivity.mContext).water.setCid(cup.getCid());
+                        ((MainActivity) MainActivity.mContext).water.setLastDrink(((BluetoothActivity)BluetoothActivity.mBluetooth).data);
+                        ((MainActivity) MainActivity.mContext).water.setLastDrinkDate(null);
+
+                        Log.d(TAG, ((MainActivity) MainActivity.mContext).water.toString());
+
+                        httpConn.drinkWater(((MainActivity) MainActivity.mContext).water, waterCallback);
+                    }
+                }
             }
         }.start();
     }
