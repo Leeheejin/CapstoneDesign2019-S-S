@@ -1,5 +1,6 @@
 package com.example.watertracker;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.media.Image;
@@ -33,6 +34,8 @@ public class Change_cup extends AppCompatActivity {
     private ArrayList<Integer> cupInfoArrayList = new ArrayList<>(); //TODO: cup Image
     private List<Cup> cupList;
 
+    public static Activity c_cAct;
+
     public Cup cup = new Cup();
 
     Button addCup;
@@ -42,6 +45,8 @@ public class Change_cup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_change_cup);
+
+        c_cAct = Change_cup.this;
 
         addCup = (Button)findViewById(R.id.cup_change);
 

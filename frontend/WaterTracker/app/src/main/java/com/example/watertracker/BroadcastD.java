@@ -39,7 +39,7 @@ public class BroadcastD extends BroadcastReceiver {
         mBuilder.setContentIntent(pendingIntent);
         mBuilder.setSmallIcon(R.drawable.icon1);
         mBuilder.setContentTitle("Your Title");
-        mBuilder.setContentText("0모금 마시는 걸 추천드려요");
+        mBuilder.setContentText("물 한모금 마시는 걸 추천드려요");
         mBuilder.setPriority(Notification.PRIORITY_MAX);
         mBuilder.setStyle(bigText);
         mBuilder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);

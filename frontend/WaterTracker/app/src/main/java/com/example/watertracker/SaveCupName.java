@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.watertracker.R;
 import com.example.watertracker.domain.Cup;
@@ -61,8 +62,17 @@ public class SaveCupName extends AppCompatActivity {
                 ((MainActivity)MainActivity.mContext).cup.setCupWeight(1111);
                 ((MainActivity)MainActivity.mContext).saveCup();
 
+                //long savedCid = ((MainActivity)MainActivity.mContext).account.getCupList().get(0).getCid();
+                //((MainActivity)MainActivity.mContext).cup.setCid(savedCid);
+                //((MainActivity)MainActivity.mContext).chanceCup();
+                //Toast.makeText(SaveCupName.this, "새로운 컵을 사용합니다.", Toast.LENGTH_SHORT).show();
+
                 //cupList.add(cup);
                 ((MainActivity)MainActivity.mContext).getUserInfo();
+
+
+                //Change_cup c_cAct = (Change_cup) Change_cup.c_cAct;
+                //c_cAct.finish();
 
                 Intent intent = new Intent(SaveCupName.this, Change_cup.class);
                 startActivity(intent);
