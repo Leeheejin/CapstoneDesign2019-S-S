@@ -1,5 +1,6 @@
 package com.example.watertracker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -57,6 +58,7 @@ public class Change_information extends AppCompatActivity {
     Button btn;
     EditText putweight;
     TextView avgdrop;
+    public int mainweight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,11 @@ public class Change_information extends AppCompatActivity {
         avgdrop.setText(avg_drop+"");
 
         putweight = (EditText)findViewById(R.id.put_weight);
+
+        mainweight = ((MainActivity)MainActivity.mContext).account.getWeight();
+        putweight.setText(mainweight+"");
+
+
 
         putweight.addTextChangedListener(new TextWatcher() {
             @Override
@@ -110,6 +117,9 @@ public class Change_information extends AppCompatActivity {
                 Log.d(TAG, ((MainActivity)MainActivity.mContext).account.toString());
 
                 Toast.makeText(getApplicationContext(),"수정완료",Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(Change_information.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 

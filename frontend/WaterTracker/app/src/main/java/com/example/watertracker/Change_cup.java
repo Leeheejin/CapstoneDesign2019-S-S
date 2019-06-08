@@ -111,7 +111,7 @@ public class Change_cup extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Change_cup.this, SaveCupName.class);
+                Intent intent = new Intent(Change_cup.this, InputCupData.class);
                 startActivity(intent);
 
 
@@ -125,8 +125,7 @@ public class Change_cup extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = getIntent();
-                finish();
+                Intent intent = new Intent(Change_cup.this, MainActivity.class);
                 startActivity(intent);
 
             }

@@ -138,7 +138,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/btn_custom"
         android:fontFamily="@font/namsan"
-        android:text="메인화면으로 넘기기"
+        android:text="다음"
         android:textColor="#ffffff"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
