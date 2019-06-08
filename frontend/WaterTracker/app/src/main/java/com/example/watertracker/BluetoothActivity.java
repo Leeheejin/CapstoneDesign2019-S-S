@@ -69,15 +69,6 @@ public class BluetoothActivity extends AppCompatActivity {
         });
 
 
-        Button btnPass = findViewById(R.id.btnPass);
-        btnPass.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent intent = new Intent(
-                        getApplicationContext(), InputCupData.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
     public void onDestroy() {
@@ -104,6 +95,9 @@ public class BluetoothActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 bt.send("Text", true);
+                Intent intent = new Intent(
+                        getApplicationContext(), InputCupData.class);
+                startActivity(intent);
             }
         });
     }
