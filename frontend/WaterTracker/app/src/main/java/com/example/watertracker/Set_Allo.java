@@ -1,6 +1,7 @@
 package com.example.watertracker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -181,6 +182,21 @@ public class Set_Allo extends AppCompatActivity {
                 SharedPreferences.Editor ed = prefs.edit();
                 ed.putBoolean("Allo", isDefault);
                 ed.commit();
+
+                SharedPreferences isNew = getSharedPreferences("isNew", MODE_PRIVATE);
+
+                if(isNew.getBoolean("New", true)) {
+
+                    SharedPreferences.Editor ed2 = isNew.edit();
+                    ed2.putBoolean("New", false);
+                    ed2.commit();
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+
+                }
+
+                Log.d("isDefault", String.valueOf(isDefault));
 
                 if(isDefault) {
                     weight= ((MainActivity)MainActivity.mContext).account.getWeight();
