@@ -31,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
             }catch(InterruptedException e){
                 e.printStackTrace();
             }
-
+            //TODO: 분기설정
             Intent intent = new Intent(SplashActivity.this, BluetoothActivity.class);
             startActivity(intent);
             SplashActivity.this.finish();
